@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from shapeCreator import Input, Label, Button
+from game import Game
 
 pygame.init()
 
@@ -67,7 +68,7 @@ class GameMenu():
         if self.startButton.checkCollision(mousePos):
             self.startButton.color = (0, 255, 0)
             if self.click:
-                pass
+                Game().mainloopGame1()
         else:
             self.startButton.color = (36, 36, 36)
         
