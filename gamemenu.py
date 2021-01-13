@@ -1,20 +1,20 @@
 import pygame, sys
 from pygame.locals import *
-from shapeCreator import Label, Button
+from shapeCreator import Input, Label, Button
 
 pygame.init()
 
 icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png')
 
 winName = "Start"
-#winWidth = 1600
-#winHeight = 900
-winWidth = 1920
-winHeight = 1080
+winWidth = 1600
+winHeight = 900
+#winWidth = 1920
+#winHeight = 1080
 
 pygame.display.set_caption(winName)
-#win = pygame.display.set_mode((winWidth, winHeight))
-win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
+win = pygame.display.set_mode((winWidth, winHeight))
+#win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
             
 class GameMenu():
@@ -60,7 +60,6 @@ class GameMenu():
         self.startButton.drawButton()
         self.optionsButton.drawButton()
         self.exitButtonStartScreen.drawButton()
-
 
     def buttonPressStartScreen(self):
         mousePos = pygame.mouse.get_pos()
@@ -124,15 +123,15 @@ class GameMenu():
         self.dKeyLabel = Button(self.win, (36, 36, 36), 50, 425, self.winWidth - 100, 50, "|")
         self.rightKeyLetter = Label(self.win, "MOVE RIGHT", 60, 435)
         self.dKeyLetter = Label(self.win, "D", self.winWidth/2 + 10, 435)
-        self.nKeyLabel = Button(self.win, (36, 36, 36), 50, 500, self.winWidth - 100, 50, "|")
-        self.ntestKeyLetter = Label(self.win, "...", 60, 510)
-        self.nKeyLetter = Label(self.win, "N", self.winWidth/2 + 10, 510)
-        self.jKeyLabel = Button(self.win, (36, 36, 36), 50, 575, self.winWidth - 100, 50, "|")
-        self.jtestKeyLetter = Label(self.win, "...", 60, 585)
-        self.jKeyLetter = Label(self.win, "J", self.winWidth/2 + 10, 585)
-        self.kKeyLabel = Button(self.win, (36, 36, 36), 50, 650, self.winWidth - 100, 50, "|")
-        self.ktestKeyLetter = Label(self.win, "...", 60, 660)
-        self.kKeyLetter = Label(self.win, "K", self.winWidth/2 + 10, 660)
+        self.mKeyLabel = Button(self.win, (36, 36, 36), 50, 500, self.winWidth - 100, 50, "|")
+        self.interactKeyLetter = Label(self.win, "INTERACT", 60, 510)
+        self.mKeyLetter = Label(self.win, "M", self.winWidth/2 + 10, 510)
+        self.kKeyLabel = Button(self.win, (36, 36, 36), 50, 575, self.winWidth - 100, 50, "|")
+        self.sprintKeyLetter = Label(self.win, "SPRINT", 60, 585)
+        self.kKeyLetter = Label(self.win, "K", self.winWidth/2 + 10, 585)
+        self.lKeyLabel = Button(self.win, (36, 36, 36), 50, 650, self.winWidth - 100, 50, "|")
+        self.inventoryKeyLetter = Label(self.win, "INVENTORY", 60, 660)
+        self.lKeyLetter = Label(self.win, "L", self.winWidth/2 + 10, 660)
 
     def placeOptionsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
@@ -153,15 +152,15 @@ class GameMenu():
         self.dKeyLabel.drawButton()
         self.rightKeyLetter.drawLetter()
         self.dKeyLetter.drawLetter()
-        self.nKeyLabel.drawButton()
-        self.ntestKeyLetter.drawLetter()
-        self.nKeyLetter.drawLetter()
-        self.jKeyLabel.drawButton()
-        self.jtestKeyLetter.drawLetter()
-        self.jKeyLetter.drawLetter()
+        self.mKeyLabel.drawButton()
+        self.interactKeyLetter.drawLetter()
+        self.mKeyLetter.drawLetter()
         self.kKeyLabel.drawButton()
-        self.ktestKeyLetter.drawLetter()
+        self.sprintKeyLetter.drawLetter()
         self.kKeyLetter.drawLetter()
+        self.lKeyLabel.drawButton()
+        self.inventoryKeyLetter.drawLetter()
+        self.lKeyLetter.drawLetter()
         
 
     def buttonPressOptionsScreen(self):
