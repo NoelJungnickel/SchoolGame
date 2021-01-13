@@ -1,8 +1,15 @@
 import pygame, sys
 from pygame.locals import *
 
+class Input():
+    def __init__(self, win):
+        self.win = win
+    
+    def drawInput(self):
+        pass
+
 class Label():
-    def __init__(self, win, text, color, x, y, fontSize = 50):
+    def __init__(self, win, text, x, y, color = (255, 255, 255), fontSize = 50):
         pygame.font.init()
         self.mainFont = pygame.font.SysFont('comicsans', fontSize)
         
