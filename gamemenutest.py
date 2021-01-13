@@ -5,7 +5,7 @@ winName = "Start"
 pygame.display.set_caption(winName)
 win = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-bg = pygame.image.load("Steine.png")
+#bg = pygame.image.load("Steine.png")
 
 class GameWindow():
     def __init__(self):
@@ -94,6 +94,7 @@ class GameWindow():
         self.mousePressed = pygame.mouse.get_pressed() 
 
         if self.exitButton.collidepoint(self.mousePos):
+            print(self.exitButton.collidepoint(self.mousePos))
             self.exitButtonColor = self.red 
         else:
             self.exitButtonColor = (36, 36, 36)
