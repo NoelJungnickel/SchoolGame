@@ -1,6 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from shapeCreator import Input, Label, Button
+from characterCreator import Character
 
 pygame.init()
 
@@ -51,10 +52,10 @@ class Game():
                             self.click = True
                         
     def createGame(self):
-        self.character = Button(self.win, (255, 0, 0), self.winWidth/2 - 50, self.winHeight/2 - 50, 100, 100)
+        self.character = Character(self.win, self.winWidth/2, self.winHeight/2, r'C:\Users\Noel\Pictures\Kochium.png')
 
     def placeGame(self):
-        self.character.drawButton()
+        self.character.drawCharacter()
 
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
@@ -72,13 +73,13 @@ class Game():
                 self.character.x -= 10
 
         if keys[pygame.K_s]:
-            if self.character.y >= winHeight - self.character.height:
+            if self.character.y >= winHeight - self.character.getCharacterWidth():
                 pass
             else:
                 self.character.y += 10
 
         if keys[pygame.K_d]:
-            if self.character.x >= winWidth - self.character.width:
+            if self.character.x >= winWidth - self.character.getCharacterHeight():
                 pass
             else:
                 self.character.x += 10
