@@ -28,7 +28,11 @@ class Game():
         self.winWidth = winWidth
         self.winHeight = winHeight
         self.click = False
-        
+        self.gridX = 1
+        self.gridY = 1
+        self.characterX = 100
+        self.characterY = 100
+
     def mainloopGame1(self):
         self.createGame()
 
@@ -37,6 +41,8 @@ class Game():
             self.win.fill((204, 204, 204))
             self.placeGame()
             self.keyPressGame()
+            self.screen1 = Label(self.win, "1", 500, 500, (255, 0, 0), 200)
+            self.screen1.drawLetter()
 
             pygame.display.update()
 
@@ -50,37 +56,280 @@ class Game():
                     if event.type == MOUSEBUTTONDOWN:
                         if event.button == 1:
                             self.click = True
-                        
+
+    def mainloopGame2(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
+            self.screen2.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame3(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen3 = Label(self.win, "3", 500, 500, (255, 0, 0), 200)
+            self.screen3.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame4(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen4= Label(self.win, "4", 500, 500, (255, 0, 0), 200)
+            self.screen4.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame5(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
+            self.screen5.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame6(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen6 = Label(self.win, "6", 500, 500, (255, 0, 0), 200)
+            self.screen6.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame7(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen7 = Label(self.win, "7", 500, 500, (255, 0, 0), 200)
+            self.screen7.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame8(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen8 = Label(self.win, "8", 500, 500, (255, 0, 0), 200)
+            self.screen8.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def mainloopGame9(self):
+        self.createGame()
+
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((204, 204, 204))
+            self.placeGame()
+            self.keyPressGame()
+            self.screen9 = Label(self.win, "9", 500, 500, (255, 0, 0), 200)
+            self.screen9.drawLetter()
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
     def createGame(self):
-        self.character = Character(self.win, self.winWidth/2, self.winHeight/2, r'C:\Users\Noel\Pictures\Kochium.png')
+        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
 
     def placeGame(self):
         self.character.drawCharacter()
 
+    def loadMainloop(self):
+        if self.gridX == 1 and self.gridY == 1:
+            self.mainloopGame1()
+        elif self.gridX == 2 and self.gridY == 1:
+            self.mainloopGame2()
+        elif self.gridX == 3 and self.gridY == 1:
+            self.mainloopGame3()
+        elif self.gridX == 1 and self.gridY == 2:
+            self.mainloopGame4()
+        elif self.gridX == 2 and self.gridY == 2:
+            self.mainloopGame5()
+        elif self.gridX == 3 and self.gridY == 2:
+            self.mainloopGame6()
+        elif self.gridX == 1 and self.gridY == 3:
+            self.mainloopGame7()
+        elif self.gridX == 2 and self.gridY == 3:
+            self.mainloopGame8()
+        elif self.gridX == 3 and self.gridY == 3:
+            self.mainloopGame9()
+
+    def checkEdgesW(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_w]:
+            if self.gridY != 1:
+                self.gridY -= 1
+                self.loadMainloop()
+
+    def checkEdgesA(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_a]:
+            if self.gridX != 1:
+                self.gridX -= 1
+                self.loadMainloop()
+
+    def checkEdgesS(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_s]:
+            if self.gridY != 3:
+                self.gridY += 1
+                self.loadMainloop()
+
+    def checkEdgesD(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_d]:
+            if self.gridX != 3:
+                self.gridX += 1
+                self.loadMainloop()
+                        
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_w]:
             if self.character.y <= 0:
-                pass
+                self.checkEdgesW()
             else:
                 self.character.y -= 10
 
         if keys[pygame.K_a]:
             if self.character.x <= 0:
-                pass
+                self.checkEdgesA()
             else:
                 self.character.x -= 10
 
         if keys[pygame.K_s]:
             if self.character.y >= winHeight - self.character.getCharacterWidth():
-                pass
+                self.checkEdgesS()
             else:
                 self.character.y += 10
 
         if keys[pygame.K_d]:
             if self.character.x >= winWidth - self.character.getCharacterHeight():
-                pass
+                self.checkEdgesD()
             else:
                 self.character.x += 10
 
