@@ -41,7 +41,14 @@ class Button():
             return True
         else:
             return False
-        
+
+    def checkCollisionRect(self, rectPos):
+        col = pygame.Rect(self.x, self.y, self.width, self.height).colliderect(rectPos)
+        if col == 1:
+            return True
+        else:
+            return False
+
     def drawButton(self):
         pygame.font.init()
         font = pygame.font.SysFont('comicsans', self.textSize)

@@ -5,7 +5,7 @@ from game import Game
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png')
+icon = pygame.image.load(r'C:\Users\Ozzy\Desktop\Bilder von Leuten\Surzher.png')
 
 winName = "Start"
 winWidth = 1600

@@ -5,7 +5,7 @@ from characterCreator import Character
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png')
+icon = pygame.image.load(r'C:\Users\Ozzy\Desktop\Bilder von Leuten\Surzher.png')
 
 winName = "Start"
 winWidth = 1600
@@ -139,7 +139,12 @@ class Game():
             self.keyPressGame()
             self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
             self.screen5.drawLetter()
-
+            self.LevelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'LevelUp', textColor = (0, 0, 255), textSize = 50)
+            self.LevelUp.drawButton()
+            self.Level = Label(self.win, str(self.character.Level), 800, 500, (0, 255, 0), 200)
+            self.Level.drawLetter()
+            if self.LevelUp.checkCollisionRect(self.character.characterToRect()):
+                self.character.LevelUp()
             pygame.display.update()
 
             self.click = False
@@ -249,7 +254,7 @@ class Game():
                         if event.button == 1:
                             self.click = True
     def createGame(self):
-        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
+        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Ozzy\Desktop\Bilder von Leuten\Surzher.png')
 
     def placeGame(self):
         self.character.drawCharacter()
@@ -313,25 +318,25 @@ class Game():
             if self.character.y <= 0:
                 self.checkEdgesW()
             else:
-                self.character.y -= 10
+                self.character.y -= self.character.vel
 
         if keys[pygame.K_a]:
             if self.character.x <= 0:
                 self.checkEdgesA()
             else:
-                self.character.x -= 10
+                self.character.x -= self.character.vel
 
         if keys[pygame.K_s]:
             if self.character.y >= winHeight - self.character.getCharacterWidth():
                 self.checkEdgesS()
             else:
-                self.character.y += 10
+                self.character.y += self.character.vel
 
         if keys[pygame.K_d]:
             if self.character.x >= winWidth - self.character.getCharacterHeight():
                 self.checkEdgesD()
             else:
-                self.character.x += 10
+                self.character.x += self.character.vel
 
     def escScreen(self):
         self.escRun = True
