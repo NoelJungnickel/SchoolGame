@@ -1,12 +1,51 @@
 import pygame, sys
 from pygame.locals import *
 
-class Input():
-    def __init__(self, win):
+class Entry():
+    def __init__(self, win, x, y, width, height, color = (36, 36, 36), text = "", thickness = 2):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color
+        self.text = text
+        self.thickness = thickness
         self.win = win
+        self.focused = False
     
-    def drawInput(self):
-        pass
+    def drawEntry(self):
+        pygame.draw.rect(self.win, self.color, (self.x, self.y, self.width, self.height), self.thickness)
+        font = pygame.font.Font(None, 50)
+        surface = font.render(self.text, True, (255, 255, 255))
+        self.win.blit(surface, (self.x + 1, self.y + 1))
+
+    def checkCollision(self, mousePos):
+        col = pygame.Rect(self.x, self.y, self.width, self.height).collidepoint(mousePos)
+        if col == 1:
+            return True
+        else:
+            return False
+        
+    def activateEntry(self, event):
+        mousePos = pygame.mouse.get_pos()
+        if event.type == MOUSEBUTTONDOWN:
+            if self.checkCollision(mousePos):
+                self.focused = True
+            else:
+                self.focused = False
+
+    def editEntry(self, event):
+        if self.focused == True:
+            self.color = (255, 255, 255)
+        else:
+            self.color = (36, 36, 36)
+
+        if event.type == KEYDOWN:
+            if self.focused == True:
+                if len(self.text) == 0:
+                    self.text += event.unicode.upper()
+                if event.key == K_BACKSPACE:
+                    self.text = self.text[:-1]
 
 class Label():
     def __init__(self, win, text, x, y, color = (255, 255, 255), fontSize = 50):

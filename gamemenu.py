@@ -1,11 +1,11 @@
 import pygame, sys
 from pygame.locals import *
-from shapeCreator import Input, Label, Button
+from shapeCreator import Entry, Label, Button
 from game import Game
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png')
+icon = pygame.image.load(r'C:\Users\Noel\Desktop\Schule\Informatik\Tests\Monster.png')
 
 winName = "Start"
 winWidth = 1600
@@ -29,6 +29,7 @@ class GameMenu():
         self.winWidth = winWidth
         self.winHeight = winHeight
         self.click = False
+        self.active = False
         
     def mainloopStartMenu(self):
         self.createStartscreen()
@@ -42,14 +43,14 @@ class GameMenu():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            exit()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        exit()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def createStartscreen(self):
         self.startButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "START")
@@ -96,73 +97,65 @@ class GameMenu():
             self.placeOptionsScreen()
             self.buttonPressOptionsScreen()
             pygame.display.update()
+            pygame.display.flip()
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.optionsRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
-    
+                for entry in self.entryList:
+                    entry.activateEntry(event)
+                    entry.editEntry(event)
+
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.optionsRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
     def createOptionsScreen(self):
+        self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
+        self.keysLabel = Label(self.win, "KEYS", self.winWidth/2 + 10, 60)
+        self.upKeyLetter = Label(self.win, "MOVE UP", 60, 210)
+        self.leftKeyLetter = Label(self.win, "MOVE LEFT", 60, 285)
+        self.downKeyLetter = Label(self.win, "MOVE DOWN", 60, 360)
+        self.rightKeyLetter = Label(self.win, "MOVE RIGHT", 60, 435)
+        self.interactKeyLetter = Label(self.win, "INTERACT", 60, 510)
+        self.sprintKeyLetter = Label(self.win, "SPRINT", 60, 585)
+        self.inventoryKeyLetter = Label(self.win, "INVENTORY", 60, 660)
+        self.labelList = [self.commandsLabel, self.keysLabel, self.upKeyLetter, self.leftKeyLetter, self.downKeyLetter, self.rightKeyLetter, self.interactKeyLetter, self.sprintKeyLetter, self.inventoryKeyLetter]
+
         self.exitButtonOptionsScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
         self.backButtonOptionsScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
         self.topBarLabel = Button(self.win, (36, 36, 36), 50, 50, self.winWidth - 100, 50)
-        self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
-        self.keysLabel = Label(self.win, "KEYS", self.winWidth/2 + 10, 60)
         self.wKeyLabel = Button(self.win, (36, 36, 36), 50, 200, self.winWidth - 100, 50, "|")
-        self.upKeyLetter = Label(self.win, "MOVE UP", 60, 210)
-        self.wKeyLetter = Label(self.win, "W", self.winWidth/2 + 10, 210)
         self.aKeyLabel = Button(self.win, (36, 36, 36), 50, 275, self.winWidth - 100, 50, "|")
-        self.leftKeyLetter = Label(self.win, "MOVE LEFT", 60, 285)
-        self.aKeyLetter = Label(self.win, "A", self.winWidth/2 + 10, 285)
         self.sKeyLabel = Button(self.win, (36, 36, 36), 50, 350, self.winWidth - 100, 50, "|")
-        self.downKeyLetter = Label(self.win, "MOVE DOWN", 60, 360)
-        self.sKeyLetter = Label(self.win, "S", self.winWidth/2 + 10, 360)
         self.dKeyLabel = Button(self.win, (36, 36, 36), 50, 425, self.winWidth - 100, 50, "|")
-        self.rightKeyLetter = Label(self.win, "MOVE RIGHT", 60, 435)
-        self.dKeyLetter = Label(self.win, "D", self.winWidth/2 + 10, 435)
         self.mKeyLabel = Button(self.win, (36, 36, 36), 50, 500, self.winWidth - 100, 50, "|")
-        self.interactKeyLetter = Label(self.win, "INTERACT", 60, 510)
-        self.mKeyLetter = Label(self.win, "M", self.winWidth/2 + 10, 510)
         self.kKeyLabel = Button(self.win, (36, 36, 36), 50, 575, self.winWidth - 100, 50, "|")
-        self.sprintKeyLetter = Label(self.win, "SPRINT", 60, 585)
-        self.kKeyLetter = Label(self.win, "K", self.winWidth/2 + 10, 585)
         self.lKeyLabel = Button(self.win, (36, 36, 36), 50, 650, self.winWidth - 100, 50, "|")
-        self.inventoryKeyLetter = Label(self.win, "INVENTORY", 60, 660)
-        self.lKeyLetter = Label(self.win, "L", self.winWidth/2 + 10, 660)
+        self.buttonList = [self.exitButtonOptionsScreen, self.backButtonOptionsScreen, self.topBarLabel, self.wKeyLabel, self.aKeyLabel, self.sKeyLabel, self.dKeyLabel, self.mKeyLabel, self.kKeyLabel, self.lKeyLabel]
+
+        self.wEntry = Entry(self.win, self.winWidth/2 + 8, 208, 35, 33, (36, 36, 36), "W")
+        self.aEntry = Entry(self.win, self.winWidth/2 + 8, 283, 35, 33, (36, 36, 36), "A")
+        self.sEntry = Entry(self.win, self.winWidth/2 + 8, 358, 35, 33, (36, 36, 36), "S")
+        self.dEntry = Entry(self.win, self.winWidth/2 + 8, 433, 35, 33, (36, 36, 36), "D")
+        self.mEntry = Entry(self.win, self.winWidth/2 + 8, 508, 35, 33, (36, 36, 36), "M")
+        self.kEntry = Entry(self.win, self.winWidth/2 + 8, 583, 35, 33, (36, 36, 36), "K")
+        self.iEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "I")
+        self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.iEntry]
 
     def placeOptionsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
-        self.exitButtonOptionsScreen.drawButton()
-        self.backButtonOptionsScreen.drawButton()
-        self.topBarLabel.drawButton()
-        self.commandsLabel.drawLetter()
-        self.keysLabel.drawLetter()
-        self.wKeyLabel.drawButton()
-        self.upKeyLetter.drawLetter()
-        self.wKeyLetter.drawLetter()
-        self.aKeyLabel.drawButton()
-        self.leftKeyLetter.drawLetter()
-        self.aKeyLetter.drawLetter()
-        self.sKeyLabel.drawButton()
-        self.downKeyLetter.drawLetter()
-        self.sKeyLetter.drawLetter()
-        self.dKeyLabel.drawButton()
-        self.rightKeyLetter.drawLetter()
-        self.dKeyLetter.drawLetter()
-        self.mKeyLabel.drawButton()
-        self.interactKeyLetter.drawLetter()
-        self.mKeyLetter.drawLetter()
-        self.kKeyLabel.drawButton()
-        self.sprintKeyLetter.drawLetter()
-        self.kKeyLetter.drawLetter()
-        self.lKeyLabel.drawButton()
-        self.inventoryKeyLetter.drawLetter()
-        self.lKeyLetter.drawLetter()
-        
+
+        for button in self.buttonList:
+            button.drawButton()
+
+        for label in self.labelList:
+            label.drawLetter()
+
+        for entry in self.entryList:
+            entry.drawEntry()
 
     def buttonPressOptionsScreen(self):
         mousePos = pygame.mouse.get_pos()
@@ -181,4 +174,5 @@ class GameMenu():
         else:
             self.backButtonOptionsScreen.color = (36, 36, 36)
 
-GameMenu().mainloopStartMenu()
+Menu1 = GameMenu()
+Menu1.mainloopStartMenu()
