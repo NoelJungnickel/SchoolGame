@@ -5,7 +5,7 @@ from characterCreator import Character
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Desktop\Schule\Informatik\Tests\Monster.png')
+icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium2.png')
 
 winName = "Start"
 winWidth = 1600
@@ -32,6 +32,7 @@ class Game():
         self.gridY = 1
         self.characterX = 100
         self.characterY = 100
+        self.vel = 5
 
     def mainloopGame1(self):
         self.createGame()
@@ -256,7 +257,7 @@ class Game():
                             self.click = True
             
     def createGame(self):
-        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Desktop\Schule\Informatik\Tests\Monster.png')
+        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
 
     def placeGame(self):
         self.character.drawCharacter()
@@ -308,7 +309,7 @@ class Game():
     def checkEdgesD(self):
         keys = pygame.key.get_pressed()
 
-        if eval(f'keys[pygame.K_{self.Entry.text.lower()}]'):
+        if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
             if self.gridX != 3:
                 self.gridX += 1
                 self.loadMainloop()
