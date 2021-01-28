@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from characterCreator import Character
+from fightingScreen import Fight
 
 pygame.init()
 
@@ -69,6 +70,11 @@ class Game():
             self.keyPressGame()
             self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
             self.screen2.drawLetter()
+
+            self.triggerFight = Button(self.win, (255, 255, 255), 600, 600, 80, 50, text = 'FIGHT', textColor = (0, 0, 255), textSize = 50)
+            self.triggerFight.drawButton()
+            if self.triggerFight.checkCollisionRect(self.character.characterToRect()):
+                Fight().fightLoop()
 
             pygame.display.update()
 
@@ -141,12 +147,14 @@ class Game():
             self.keyPressGame()
             self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
             self.screen5.drawLetter()
-            self.LevelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'LevelUp', textColor = (0, 0, 255), textSize = 50)
-            self.LevelUp.drawButton()
-            self.Level = Label(self.win, str(self.character.Level), 800, 500, (0, 255, 0), 200)
-            self.Level.drawLetter()
-            if self.LevelUp.checkCollisionRect(self.character.characterToRect()):
-                self.character.LevelUp()
+
+            self.levelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'levelUp', textColor = (0, 0, 255), textSize = 50)
+            self.levelUp.drawButton()
+            self.level = Label(self.win, str(self.character.level), 800, 500, (0, 255, 0), 200)
+            self.level.drawLetter()
+            if self.levelUp.checkCollisionRect(self.character.characterToRect()):
+                self.character.levelUp()
+
             pygame.display.update()
 
             self.click = False

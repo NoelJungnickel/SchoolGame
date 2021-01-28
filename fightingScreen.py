@@ -1,11 +1,13 @@
 import pygame, sys
 from pygame.locals import *
 from shapeCreator import Entry, Label, Button
-from game import Game
+from characterCreator import Character
 
 pygame.init()
 
 icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png')
+placeholder1 = pygame.image.load(r'C:\Users\Noel\Pictures\Dc10.png')
+placeholder2 = pygame.image.load(r'C:\Users\Noel\Pictures\Avatar.png')
 
 winName = "Start"
 winWidth = 1600
@@ -17,61 +19,137 @@ pygame.display.set_caption(winName)
 win = pygame.display.set_mode((winWidth, winHeight))
 #win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
-            
-class GameMenu():
+
+class Fight():
     def __init__(self):
         self.win = win
         self.winName = winName
-        self.startRun = True
-        self.optionsRun = True
+        self.gameRun = True
         self.clock = pygame.time.Clock()
         self.FPS = 60
         self.winWidth = winWidth
         self.winHeight = winHeight
         self.click = False
-        self.active = False
-        
-    def mainloopStartMenu(self):
-        self.createStartscreen()
 
-        while self.startRun:
+    def fightLoop(self):
+        self.createFight()
+
+        while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.fill((0, 0, 0))
-            self.placeStartscreen()
-            self.buttonPressStartScreen()
+            self.buttonPressFightScreen()
+            self.placeFight()
+
             pygame.display.update()
 
             self.click = False
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.startRun = False
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        exit()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+                    if event.type == pygame.QUIT:
+                        self.startRun = False
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escScreen()
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
 
-    def createStartscreen(self):
-        self.startButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "START")
+    def createFight(self):
+        #self.placeholder = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\placeholder.png')
+        
+        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, "Enemy HP")
+        
+        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 790, 425, 300, 60, "Player HP")
+
+        self.chooseAction = Button(self.win, (36, 36, 36), 50, self.winHeight - 180, 750, 150)
+
+        self.chooseAttack = Button(self.win, (36, 36, 36), 810, self.winHeight - 180, 750, 150)
+
+        self.distictionLine = Button(self.win, (0, 0, 255), 0, 360, 2000, 10, "")
+
+        self.attackButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 170, 730, 60, "Attack")
+
+        self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 360, 60, "Stats")
+
+        self.escapeButton = Button(self.win, (10, 10, 10), 430, self.winHeight - 100, 360, 60, "Escape")
+
+    def placeFight(self):
+        pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
+        pygame.draw.rect(self.win, (0, 0, 255), (910, self.winHeight - 870, 550, 300), 10)
+        #self.placeholder.drawCharacter()
+        self.enemyHpBar.drawButton()
+        self.playerHpBar.drawButton()
+        self.chooseAction.drawButton()
+        self.chooseAttack.drawButton()
+        self.distictionLine.drawButton()
+        self.attackButton.drawButton()
+        self.escapeButton.drawButton()
+        self.statsButton.drawButton()
+
+    def buttonPressFightScreen(self):
+        mousePos = pygame.mouse.get_pos()
+
+        if self.attackButton.checkCollision(mousePos):
+            self.attackButton.color = (255, 0, 0)
+            if self.click:
+                exit()
+        else:
+            self.attackButton.color = (10, 10, 10)
+
+        if self.escapeButton.checkCollision(mousePos):
+            self.escapeButton.color = (0, 255, 255)
+            if self.click:
+                exit()
+        else:
+            self.escapeButton.color = (10, 10, 10)
+
+        if self.statsButton.checkCollision(mousePos):
+            self.statsButton.color = (255, 0, 255)
+            if self.click:
+                exit()
+        else:
+            self.statsButton.color = (10, 10, 10)
+
+    def escScreen(self):
+        self.escRun = True
+        self.createEscScreen()
+
+        while self.escRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((0, 0, 0))
+            self.placeEscScreen()
+            self.buttonPressEscScreen()
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.escRun = False
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def createEscScreen(self):
+        self.continueButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "CONTINUE")
         self.optionsButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 25, 200, 50, "OPTIONS")
         self.exitButtonStartScreen = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 + 50, 200, 50, "EXIT")
 
-    def placeStartscreen(self):
+    def placeEscScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
-        self.startButton.drawButton()
+        self.continueButton.drawButton()
         self.optionsButton.drawButton()
         self.exitButtonStartScreen.drawButton()
 
-    def buttonPressStartScreen(self):
+    def buttonPressEscScreen(self):
         mousePos = pygame.mouse.get_pos()
     
-        if self.startButton.checkCollision(mousePos):
-            self.startButton.color = (0, 255, 0)
+        if self.continueButton.checkCollision(mousePos):
+            self.continueButton.color = (0, 255, 0)
             if self.click:
-                Game().mainloopGame1()
+                self.escRun = False
         else:
-            self.startButton.color = (36, 36, 36)
+            self.continueButton.color = (36, 36, 36)
         
         if self.optionsButton.checkCollision(mousePos):
             self.optionsButton.color = (0, 0, 255)
@@ -97,21 +175,19 @@ class GameMenu():
             self.placeOptionsScreen()
             self.buttonPressOptionsScreen()
             pygame.display.update()
-            pygame.display.flip()
 
             self.click = False
             for event in pygame.event.get():
-                for entry in self.entryList:
-                    entry.activateEntry(event)
-                    entry.editEntry(event)
-
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.optionsRun = False
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
-
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.optionsRun = False
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+                    for entry in self.entryList:
+                        entry.activateEntry(event)
+                        entry.editEntry(event)
+    
     def createOptionsScreen(self):
         self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
         self.keysLabel = Label(self.win, "KEYS", self.winWidth/2 + 10, 60)
@@ -156,6 +232,7 @@ class GameMenu():
 
         for entry in self.entryList:
             entry.drawEntry()
+        
 
     def buttonPressOptionsScreen(self):
         mousePos = pygame.mouse.get_pos()
@@ -173,6 +250,3 @@ class GameMenu():
                 self.optionsRun = False
         else:
             self.backButtonOptionsScreen.color = (36, 36, 36)
-
-Menu1 = GameMenu()
-Menu1.mainloopStartMenu()

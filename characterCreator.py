@@ -14,24 +14,24 @@ class Character():
         self.aktEP = 10
         self.maxXP = 10
         self.aktXP = 0
-        self.Level = 1
+        self.level = 1
         self.phyDamage = 2
         self.intDamage = 2
         self.vel = 10
 
-    def LevelUp(self):
+    def levelUp(self):
         self.maxHP += 1
         self.maxEP += 1
         self.maxXP += 1
         self.phyDamage += 1
         self.intDamage += 1
-        self.Level += 1
+        self.level += 1
 
     def xpGain(self, gainedXP):
         self.aktXP += gainedXP
         if self.aktXP >= self.maxXP:
             self.aktXP -= self.maxXP
-            self.LevelUp()
+            self.levelUp()
         
     def drawCharacter(self):
         self.characterpicture = pygame.image.load(self.picture)

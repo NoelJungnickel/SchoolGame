@@ -42,7 +42,7 @@ class Entry():
 
         if event.type == KEYDOWN:
             if self.focused == True:
-                if len(self.text) == 0:
+                if Fn(self.text) == 0:
                     self.text += event.unicode.upper()
                 if event.key == K_BACKSPACE:
                     self.text = self.text[:-1]
