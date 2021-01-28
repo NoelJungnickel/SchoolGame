@@ -54,29 +54,19 @@ class Fight():
                             self.click = True
 
     def createFight(self):
-        #self.placeholder = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\placeholder.png')
-        
         self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, "Enemy HP")
-        
         self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 790, 425, 300, 60, "Player HP")
-
         self.chooseAction = Button(self.win, (36, 36, 36), 50, self.winHeight - 180, 750, 150)
-
         self.chooseAttack = Button(self.win, (36, 36, 36), 810, self.winHeight - 180, 750, 150)
-
         self.distictionLine = Button(self.win, (0, 0, 255), 0, 360, 2000, 10, "")
-
         self.attackButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 170, 730, 60, "Attack")
-
         self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 360, 60, "Stats")
-
         self.escapeButton = Button(self.win, (10, 10, 10), 430, self.winHeight - 100, 360, 60, "Escape")
 
     def placeFight(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
         pygame.draw.rect(self.win, (0, 0, 255), (910, self.winHeight - 870, 550, 300), 10)
-        #self.placeholder.drawCharacter()
         self.enemyHpBar.drawButton()
         self.playerHpBar.drawButton()
         self.chooseAction.drawButton()
