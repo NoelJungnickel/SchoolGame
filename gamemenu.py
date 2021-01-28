@@ -17,6 +17,8 @@ pygame.display.set_caption(winName)
 win = pygame.display.set_mode((winWidth, winHeight))
 #win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
+
+self.createOptionsScreen()
             
 class GameMenu():
     def __init__(self):

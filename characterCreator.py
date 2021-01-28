@@ -38,7 +38,7 @@ class Character():
         self.win.blit(self.characterpicture, (self.x, self.y))
 
     def getCharacterWidth(self):
-        return self.characterpicture.get_rect().size[0]
+        return self.characterpicture.get_rect().size[1]
 
     def getCharacterHeight(self):
         return self.characterpicture.get_rect().size[1]
