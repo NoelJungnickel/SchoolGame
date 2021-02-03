@@ -95,7 +95,7 @@ class Fight():
         if self.statsButton.checkCollision(mousePos):
             self.statsButton.color = (255, 0, 255)
             if self.click:
-                pass
+                self.statsScreen()
         else:
             self.statsButton.color = (10, 10, 10)
 
@@ -107,7 +107,7 @@ class Fight():
             self.clock.tick(self.FPS)
             self.win.fill((0, 0, 0))
             self.placeStatsScreen()
-            self.buttonPressEscScreen()
+            self.buttonPressStatsScreen()
             pygame.display.update()
 
             self.click = False
@@ -120,25 +120,30 @@ class Fight():
                             self.click = True
 
     def createStatsScreen(self):
-        self.nameLabel = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, self.player)
-        self.optionsButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 25, 200, 50, "OPTIONS")
-        self.exitButtonStartScreen = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 + 50, 200, 50, "EXIT")
+        self.exitButtonStatsScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
+        self.backButtonStatsScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
 
     def placeStatsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
-        self.continueButton.drawButton()
-        self.optionsButton.drawButton()
-        self.exitButtonStartScreen.drawButton()
+        self.exitButtonStatsScreen.drawButton()
+        self.backButtonStatsScreen.drawButton()
 
     def buttonPressStatsScreen(self):
         mousePos = pygame.mouse.get_pos()
 
-        if self.backButtonOptionsScreen.checkCollision(mousePos):
-            self.backButtonOptionsScreen.color = (255, 0, 0)
+        if self.backButtonStatsScreen.checkCollision(mousePos):
+            self.backButtonStatsScreen.color = (255, 0, 0)
             if self.click:
-                self.optionsRun = False
+                self.statsRun = False
         else:
-            self.backButtonOptionsScreen.color = (36, 36, 36)
+            self.backButtonStatsScreen.color = (36, 36, 36)
+
+        if self.exitButtonStatsScreen.checkCollision(mousePos):
+            self.exitButtonStatsScreen.color = (255, 0, 0)
+            if self.click:
+                exit()
+        else:
+            self.exitButtonStatsScreen.color = (36, 36, 36)
 
     def escScreen(self):
         self.escRun = True
