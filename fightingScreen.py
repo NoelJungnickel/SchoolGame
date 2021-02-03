@@ -45,12 +45,12 @@ class Fight():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def createFight(self):
         self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, "Enemy HP")
@@ -112,12 +112,12 @@ class Fight():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.statsRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.statsRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def createStatsScreen(self):
         self.exitButtonStatsScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
@@ -158,12 +158,12 @@ class Fight():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def createEscScreen(self):
         self.continueButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "CONTINUE")
@@ -213,15 +213,15 @@ class Fight():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.optionsRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
-                    for entry in self.entryList:
-                        entry.activateEntry(event)
-                        entry.editEntry(event)
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.optionsRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+                for entry in self.entryList:
+                    entry.activateEntry(event)
+                    entry.editEntry(event)
     
     def createOptionsScreen(self):
         self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
@@ -253,8 +253,8 @@ class Fight():
         self.dEntry = Entry(self.win, self.winWidth/2 + 8, 433, 35, 33, (36, 36, 36), "D")
         self.mEntry = Entry(self.win, self.winWidth/2 + 8, 508, 35, 33, (36, 36, 36), "M")
         self.kEntry = Entry(self.win, self.winWidth/2 + 8, 583, 35, 33, (36, 36, 36), "K")
-        self.iEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "I")
-        self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.iEntry]
+        self.lEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "L")
+        self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.lEntry]
 
     def placeOptionsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)

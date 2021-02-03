@@ -18,6 +18,7 @@ class Character():
         self.phyDamage = 2
         self.intDamage = 2
         self.vel = 10
+        self.sprintVel = 20
 
     def levelUp(self):
         self.maxHP += 1

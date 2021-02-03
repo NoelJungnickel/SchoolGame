@@ -54,14 +54,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame2(self):
 
@@ -80,17 +80,17 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                        if event.key == K_m:
-                            Fight().fightLoop()
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight().fightLoop()
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame3(self):
 
@@ -106,14 +106,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame4(self):
 
@@ -129,14 +129,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame5(self):
 
@@ -159,14 +159,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame6(self):
 
@@ -182,14 +182,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame7(self):
 
@@ -205,14 +205,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame8(self):
 
@@ -228,14 +228,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def mainloopGame9(self):
   
@@ -251,17 +251,14 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escScreen()
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
-            
-    #def createGame(self):
-        #self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def placeGame(self):
         self.character.drawCharacter()
@@ -286,36 +283,28 @@ class Game():
         elif self.gridX == 3 and self.gridY == 3:
             self.mainloopGame9()
 
-    def checkEdgesW(self):
-        keys = pygame.key.get_pressed()
-
+    def checkEdgesW(self, keys):
         if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
             if self.gridY != 1:
                 self.gridY -= 1
                 self.character.y += self.winHeight - self.character.getCharacterHeight()
                 self.loadMainloop()
 
-    def checkEdgesA(self):
-        keys = pygame.key.get_pressed()
-
+    def checkEdgesA(self, keys):
         if eval(f'keys[pygame.K_{self.aEntry.text.lower()}]'):
             if self.gridX != 1:
                 self.gridX -= 1
                 self.character.x += self.winWidth - self.character.getCharacterWidth()
                 self.loadMainloop()
 
-    def checkEdgesS(self):
-        keys = pygame.key.get_pressed()
-
+    def checkEdgesS(self, keys):
         if eval(f'keys[pygame.K_{self.sEntry.text.lower()}]'):
             if self.gridY != 3:
                 self.gridY += 1
                 self.character.y -= self.winHeight - self.character.getCharacterHeight()
                 self.loadMainloop()
 
-    def checkEdgesD(self):
-        keys = pygame.key.get_pressed()
-
+    def checkEdgesD(self, keys):
         if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
             if self.gridX != 3:
                 self.gridX += 1
@@ -324,29 +313,45 @@ class Game():
 
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
+
         if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
             if self.character.y <= 0:
-                self.checkEdgesW()
+                self.checkEdgesW(keys)
             else:
-                self.character.y -= self.character.vel
+                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
+                    self.character.y -= self.character.sprintVel
+                else:
+                    self.character.y -= self.character.vel
 
         if eval(f'keys[pygame.K_{self.aEntry.text.lower()}]'):
             if self.character.x <= 0:
-                self.checkEdgesA()
+                self.checkEdgesA(keys)
             else:
-                self.character.x -= self.character.vel
+                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
+                    self.character.x -= self.character.sprintVel
+                else:
+                    self.character.x -= self.character.vel
 
         if eval(f'keys[pygame.K_{self.sEntry.text.lower()}]'):
             if self.character.y >= winHeight - self.character.getCharacterWidth():
-                self.checkEdgesS()
+                self.checkEdgesS(keys)
             else:
-                self.character.y += self.character.vel
+                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
+                    self.character.y += self.character.sprintVel
+                else:
+                    self.character.y += self.character.vel
 
         if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
             if self.character.x >= winWidth - self.character.getCharacterHeight():
-                self.checkEdgesD()
+                self.checkEdgesD(keys)
             else:
-                self.character.x += self.character.vel
+                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
+                    self.character.x += self.character.sprintVel
+                else:
+                    self.character.x += self.character.vel
+
+        if eval(f'keys[pygame.K_{self.lEntry.text.lower()}]'):
+            Game().inventoryLoop()
 
     def escScreen(self):
         self.escRun = True
@@ -361,12 +366,12 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.escRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
 
     def createEscScreen(self):
         self.continueButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "CONTINUE")
@@ -416,15 +421,15 @@ class Game():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == KEYDOWN:
-                        if event.key == K_ESCAPE:
-                            self.optionsRun = False
-                    if event.type == MOUSEBUTTONDOWN:
-                        if event.button == 1:
-                            self.click = True
-                    for entry in self.entryList:
-                        entry.activateEntry(event)
-                        entry.editEntry(event)
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.optionsRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+                for entry in self.entryList:
+                    entry.activateEntry(event)
+                    entry.editEntry(event)
     
     def createOptionsScreen(self):
         self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
@@ -456,8 +461,8 @@ class Game():
         self.dEntry = Entry(self.win, self.winWidth/2 + 8, 433, 35, 33, (36, 36, 36), "D")
         self.mEntry = Entry(self.win, self.winWidth/2 + 8, 508, 35, 33, (36, 36, 36), "M")
         self.kEntry = Entry(self.win, self.winWidth/2 + 8, 583, 35, 33, (36, 36, 36), "K")
-        self.iEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "I")
-        self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.iEntry]
+        self.lEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "L")
+        self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.lEntry]
 
     def placeOptionsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
@@ -488,3 +493,49 @@ class Game():
                 self.optionsRun = False
         else:
             self.backButtonOptionsScreen.color = (36, 36, 36)
+
+    def inventoryLoop(self):
+        self.inventoryRun = True
+        self.createInventoryScreen()
+
+        while self.inventoryRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((0, 0, 0))
+            self.placeInventoryScreen()
+            self.buttonPressInventoryScreen()
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.inventoryRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
+    def createInventoryScreen(self):
+        self.exitButtonInventoryScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
+        self.backButtonInventoryScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
+
+    def placeInventoryScreen(self):
+        pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        self.exitButtonInventoryScreen.drawButton()
+        self.backButtonInventoryScreen.drawButton()
+    
+    def buttonPressInventoryScreen(self):
+        mousePos = pygame.mouse.get_pos()
+
+        if self.exitButtonInventoryScreen.checkCollision(mousePos):
+            self.exitButtonInventoryScreen.color = (255, 0, 0)
+            if self.click:
+                exit()
+        else:
+            self.exitButtonInventoryScreen.color = (36, 36, 36)
+
+        if self.backButtonInventoryScreen.checkCollision(mousePos):
+            self.backButtonInventoryScreen.color = (255, 0, 0)
+            if self.click:
+                self.inventoryRun = False
+        else:
+            self.backButtonInventoryScreen.color = (36, 36, 36)
