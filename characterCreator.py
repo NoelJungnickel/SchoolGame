@@ -34,9 +34,9 @@ class Character():
             self.aktXP -= self.maxXP
             self.levelUp()
         
-    def drawCharacter(self):
+    def drawCharacter(self, x, y):
         self.characterpicture = pygame.image.load(self.picture)
-        self.win.blit(self.characterpicture, (self.x, self.y))
+        self.win.blit(self.characterpicture, (x, y))
 
     def getCharacterWidth(self):
         return self.characterpicture.get_rect().size[1]

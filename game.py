@@ -2,21 +2,21 @@ import pygame, sys
 from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from characterCreator import Character
-from fightingScreen import Fight
+from enemyCreator import Enemy
 
 pygame.init()
 
 icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium2.png')
 
-winName = "Start"
-winWidth = 1600
-winHeight = 900
-#winWidth = 1920
-#winHeight = 1080
+winName = "Game"
+#winWidth = 1600
+#winHeight = 900
+winWidth = 1920
+winHeight = 1080
 
 pygame.display.set_caption(winName)
-win = pygame.display.set_mode((winWidth, winHeight))
-#win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
+#win = pygame.display.set_mode((winWidth, winHeight))
+win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
             
 class Game():
@@ -261,7 +261,7 @@ class Game():
                         self.click = True
 
     def placeGame(self):
-        self.character.drawCharacter()
+        self.character.drawCharacter(self.character.x, self.character.y)
 
     def loadMainloop(self):
         if self.gridX == 1 and self.gridY == 1:
@@ -539,3 +539,145 @@ class Game():
                 self.inventoryRun = False
         else:
             self.backButtonInventoryScreen.color = (36, 36, 36)
+
+class Fight():
+    def __init__(self):
+        self.win = win
+        self.winName = winName
+        self.gameRun = True
+        self.clock = pygame.time.Clock()
+        self.FPS = 60
+        self.winWidth = winWidth
+        self.winHeight = winHeight
+        self.click = False
+
+    def fightLoop(self):
+        self.fightRun = True
+        self.createFight()
+
+        while self.fightRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((0, 0, 0))
+            self.buttonPressFightScreen()
+            self.startFight()
+            self.placeFight()
+            
+
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        Game().escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
+    def createFight(self):
+        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, "Enemy HP")
+        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, "Player HP")
+        self.chooseAction = Button(self.win, (36, 36, 36), 45, self.winHeight - 180, 910, 150)
+        self.chooseAttack = Button(self.win, (36, 36, 36), self.chooseAction.getButtonWidth() + 55, self.winHeight - 180, 910, 150)
+        self.distictionLine = Button(self.win, (0, 0, 255), 0, 480, 2000, 10, "")
+        self.attackButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 170, 880, 60, "Attack")
+        self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 435, 60, "Stats")
+        self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
+
+
+
+#__init__(self, win, color, x, y, width, height, text = '', textColor = (255, 255, 255), textSize = 50)
+
+
+    def placeFight(self):
+        pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
+        pygame.draw.rect(self.win, (0, 0, 255), (1200, self.winHeight - 1000, 550, 300), 10)
+        self.enemyHpBar.drawButton()
+        self.playerHpBar.drawButton()
+        self.chooseAction.drawButton()
+        self.chooseAttack.drawButton()
+        self.distictionLine.drawButton()
+        self.attackButton.drawButton()
+        self.escapeButton.drawButton()
+        self.statsButton.drawButton()
+        self.enemy1.drawEnemy(1300, 100)
+        Game().character.drawCharacter(200, 600)
+
+
+    def startFight(self):
+        self.Schüler = [r'C:\Users\Noel\Pictures\Mika_Buchholz.png', "Schüler", 10, 10, 1, 1]
+        self.Lehrer = [r'C:\Users\Noel\Pictures\Koch.png', "Lehrer", 10, 10, 1, 1]
+        self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5])
+
+    def buttonPressFightScreen(self):
+        mousePos = pygame.mouse.get_pos()
+
+        if self.attackButton.checkCollision(mousePos):
+            self.attackButton.color = (255, 0, 0)
+            if self.click:
+                exit()
+        else:
+            self.attackButton.color = (10, 10, 10)
+
+        if self.escapeButton.checkCollision(mousePos):
+            self.escapeButton.color = (0, 255, 255)
+            if self.click:
+                self.fightRun = False
+        else:
+            self.escapeButton.color = (10, 10, 10)
+
+        if self.statsButton.checkCollision(mousePos):
+            self.statsButton.color = (255, 0, 255)
+            if self.click:
+                self.statsScreen()
+        else:
+            self.statsButton.color = (10, 10, 10)
+
+    def statsScreen(self):
+        self.statsRun = True
+        self.createStatsScreen()
+
+        while self.statsRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((0, 0, 0))
+            self.placeStatsScreen()
+            self.buttonPressStatsScreen()
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.statsRun = False
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
+    def createStatsScreen(self):
+        self.exitButtonStatsScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
+        self.backButtonStatsScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
+
+    def placeStatsScreen(self):
+        pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        self.exitButtonStatsScreen.drawButton()
+        self.backButtonStatsScreen.drawButton()
+
+    def buttonPressStatsScreen(self):
+        mousePos = pygame.mouse.get_pos()
+
+        if self.backButtonStatsScreen.checkCollision(mousePos):
+            self.backButtonStatsScreen.color = (255, 0, 0)
+            if self.click:
+                self.statsRun = False
+        else:
+            self.backButtonStatsScreen.color = (36, 36, 36)
+
+        if self.exitButtonStatsScreen.checkCollision(mousePos):
+            self.exitButtonStatsScreen.color = (255, 0, 0)
+            if self.click:
+                exit()
+        else:
+            self.exitButtonStatsScreen.color = (36, 36, 36)
+
+#Fight().fightLoop()

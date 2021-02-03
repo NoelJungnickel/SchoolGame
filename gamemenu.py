@@ -3,19 +3,20 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from game import Game
 from characterCreator import Character
+
 pygame.init()
 
 icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png') #Icon
 
 winName = "Start"
-winWidth = 1600
-winHeight = 900
-#winWidth = 1920
-#winHeight = 1080
+#winWidth = 1600
+#winHeight = 900
+winWidth = 1920
+winHeight = 1080
 
 pygame.display.set_caption(winName)
-win = pygame.display.set_mode((winWidth, winHeight))
-#win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
+#win = pygame.display.set_mode((winWidth, winHeight))
+win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
 
 class GameMenu():

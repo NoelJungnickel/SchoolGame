@@ -74,6 +74,9 @@ class Button():
         self.textColor = textColor
         self.textSize = textSize
 
+    def getButtonWidth(self):
+        return self.width
+
     def checkCollision(self, mousePos):
         col = pygame.Rect(self.x, self.y, self.width, self.height).collidepoint(mousePos)
         if col == 1:
