@@ -2,7 +2,7 @@ import pygame, sys
 from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from game import Game
-
+from characterCreator import Character
 pygame.init()
 
 icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png') #Icon
@@ -17,7 +17,7 @@ pygame.display.set_caption(winName)
 win = pygame.display.set_mode((winWidth, winHeight))
 #win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
-            
+
 class GameMenu():
     def __init__(self):
         self.win = win
@@ -69,6 +69,7 @@ class GameMenu():
         if self.startButton.checkCollision(mousePos):
             self.startButton.color = (0, 255, 0)
             if self.click:
+                #Game().creator()
                 Game().mainloopGame1()
         else:
             self.startButton.color = (36, 36, 36)

@@ -31,12 +31,15 @@ class Game():
         self.click = False
         self.gridX = 1
         self.gridY = 1
+        self.vel = 5
         self.characterX = 100
         self.characterY = 100
-        self.vel = 5
+        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
 
+    """def creator(self):
+        self.createOptionsScreen()"""
+        
     def mainloopGame1(self):
-        self.createGame()
         self.createOptionsScreen()
 
         while self.gameRun:
@@ -61,7 +64,6 @@ class Game():
                             self.click = True
 
     def mainloopGame2(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -73,8 +75,6 @@ class Game():
 
             self.triggerFight = Button(self.win, (255, 255, 255), 600, 600, 80, 50, text = 'FIGHT', textColor = (0, 0, 255), textSize = 50)
             self.triggerFight.drawButton()
-            if self.triggerFight.checkCollisionRect(self.character.characterToRect()):
-                Fight().fightLoop()
 
             pygame.display.update()
 
@@ -82,6 +82,9 @@ class Game():
             for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.startRun = False
+                    if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                        if event.key == K_m:
+                            Fight().fightLoop()
                     if event.type == KEYDOWN:
                         if event.key == K_ESCAPE:
                             self.escScreen()
@@ -90,7 +93,6 @@ class Game():
                             self.click = True
 
     def mainloopGame3(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -114,7 +116,6 @@ class Game():
                             self.click = True
 
     def mainloopGame4(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -138,7 +139,6 @@ class Game():
                             self.click = True
 
     def mainloopGame5(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -169,7 +169,6 @@ class Game():
                             self.click = True
 
     def mainloopGame6(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -193,7 +192,6 @@ class Game():
                             self.click = True
 
     def mainloopGame7(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -217,7 +215,6 @@ class Game():
                             self.click = True
 
     def mainloopGame8(self):
-        self.createGame()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -241,8 +238,7 @@ class Game():
                             self.click = True
 
     def mainloopGame9(self):
-        self.createGame()
-
+  
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.fill((204, 204, 204))
@@ -264,8 +260,8 @@ class Game():
                         if event.button == 1:
                             self.click = True
             
-    def createGame(self):
-        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
+    #def createGame(self):
+        #self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
 
     def placeGame(self):
         self.character.drawCharacter()
@@ -296,6 +292,7 @@ class Game():
         if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
             if self.gridY != 1:
                 self.gridY -= 1
+                self.character.y += self.winHeight - self.character.getCharacterHeight()
                 self.loadMainloop()
 
     def checkEdgesA(self):
@@ -304,6 +301,7 @@ class Game():
         if eval(f'keys[pygame.K_{self.aEntry.text.lower()}]'):
             if self.gridX != 1:
                 self.gridX -= 1
+                self.character.x += self.winWidth - self.character.getCharacterWidth()
                 self.loadMainloop()
 
     def checkEdgesS(self):
@@ -312,6 +310,7 @@ class Game():
         if eval(f'keys[pygame.K_{self.sEntry.text.lower()}]'):
             if self.gridY != 3:
                 self.gridY += 1
+                self.character.y -= self.winHeight - self.character.getCharacterHeight()
                 self.loadMainloop()
 
     def checkEdgesD(self):
@@ -320,11 +319,11 @@ class Game():
         if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
             if self.gridX != 3:
                 self.gridX += 1
+                self.character.x -= self.winWidth - self.character.getCharacterWidth()
                 self.loadMainloop()
 
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
-        # print(eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'))
         if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
             if self.character.y <= 0:
                 self.checkEdgesW()

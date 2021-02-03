@@ -1,7 +1,7 @@
 import pygame, sys
 from pygame.locals import *
 from shapeCreator import Entry, Label, Button
-from characterCreator import Character
+
 
 pygame.init()
 
@@ -32,9 +32,10 @@ class Fight():
         self.click = False
 
     def fightLoop(self):
+        self.fightRun = True
         self.createFight()
 
-        while self.gameRun:
+        while self.fightRun:
             self.clock.tick(self.FPS)
             self.win.fill((0, 0, 0))
             self.buttonPressFightScreen()
@@ -44,8 +45,6 @@ class Fight():
 
             self.click = False
             for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        self.startRun = False
                     if event.type == KEYDOWN:
                         if event.key == K_ESCAPE:
                             self.escScreen()
@@ -89,16 +88,57 @@ class Fight():
         if self.escapeButton.checkCollision(mousePos):
             self.escapeButton.color = (0, 255, 255)
             if self.click:
-                exit()
+                self.fightRun = False
         else:
             self.escapeButton.color = (10, 10, 10)
 
         if self.statsButton.checkCollision(mousePos):
             self.statsButton.color = (255, 0, 255)
             if self.click:
-                exit()
+                pass
         else:
             self.statsButton.color = (10, 10, 10)
+
+    def statsScreen(self):
+        self.statsRun = True
+        self.createStatsScreen()
+
+        while self.statsRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((0, 0, 0))
+            self.placeStatsScreen()
+            self.buttonPressEscScreen()
+            pygame.display.update()
+
+            self.click = False
+            for event in pygame.event.get():
+                    if event.type == KEYDOWN:
+                        if event.key == K_ESCAPE:
+                            self.statsRun = False
+                    if event.type == MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.click = True
+
+    def createStatsScreen(self):
+        self.nameLabel = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, self.player)
+        self.optionsButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 25, 200, 50, "OPTIONS")
+        self.exitButtonStartScreen = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 + 50, 200, 50, "EXIT")
+
+    def placeStatsScreen(self):
+        pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        self.continueButton.drawButton()
+        self.optionsButton.drawButton()
+        self.exitButtonStartScreen.drawButton()
+
+    def buttonPressStatsScreen(self):
+        mousePos = pygame.mouse.get_pos()
+
+        if self.backButtonOptionsScreen.checkCollision(mousePos):
+            self.backButtonOptionsScreen.color = (255, 0, 0)
+            if self.click:
+                self.optionsRun = False
+        else:
+            self.backButtonOptionsScreen.color = (36, 36, 36)
 
     def escScreen(self):
         self.escRun = True
