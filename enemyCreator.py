@@ -18,8 +18,7 @@ class Enemy():
         self.name = name
         self.maxHP = maxHP
         self.aktHP = aktHP
-        #self.maxEP = 10
-        #self.aktEP = 10
+        self.xp = 20
         self.level = level
         self.phyDamage = phyDamage
         self.x = x
@@ -29,8 +28,8 @@ class Enemy():
         self.enemypicture = pygame.image.load(self.picture)
         self.win.blit(self.enemypicture, (x, y))
     
-    def schadenNehmen(self):
-        pass
+    def takeDamage(self, damage):
+        self.aktHP -= damage
 
 
 #enemy1 = Enemy(Schüler[0], Schüler[1], Schüler[2], Schüler[3], Schüler[4], Schüler[5])

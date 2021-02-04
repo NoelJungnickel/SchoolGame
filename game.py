@@ -3,6 +3,7 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from characterCreator import Character
 from enemyCreator import Enemy
+import time
 
 pygame.init()
 
@@ -34,7 +35,7 @@ class Game():
         self.vel = 5
         self.characterX = 100
         self.characterY = 100
-        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\Kochium2.png')
+        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\character.png')
 
     """def creator(self):
         self.createOptionsScreen()"""
@@ -313,11 +314,15 @@ class Game():
 
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
+        right = False
+        left = False
 
         if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
             if self.character.y <= 0:
                 self.checkEdgesW(keys)
             else:
+                right = False
+                left = False
                 if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
                     self.character.y -= self.character.sprintVel
                 else:
@@ -327,24 +332,30 @@ class Game():
             if self.character.x <= 0:
                 self.checkEdgesA(keys)
             else:
+                right = False
+                left = True
                 if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
                     self.character.x -= self.character.sprintVel
                 else:
                     self.character.x -= self.character.vel
 
         if eval(f'keys[pygame.K_{self.sEntry.text.lower()}]'):
-            if self.character.y >= winHeight - self.character.getCharacterWidth():
+            if self.character.y >= winHeight - self.character.getCharacterHeight():
                 self.checkEdgesS(keys)
             else:
+                right = False
+                left = False
                 if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
                     self.character.y += self.character.sprintVel
                 else:
                     self.character.y += self.character.vel
 
         if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
-            if self.character.x >= winWidth - self.character.getCharacterHeight():
+            if self.character.x >= winWidth - self.character.getCharacterWidth():
                 self.checkEdgesD(keys)
             else:
+                right = True
+                left = False
                 if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
                     self.character.x += self.character.sprintVel
                 else:
@@ -552,6 +563,7 @@ class Fight():
         self.click = False
 
     def fightLoop(self):
+        self.startFight()
         self.fightRun = True
         self.createFight()
 
@@ -559,7 +571,6 @@ class Fight():
             self.clock.tick(self.FPS)
             self.win.fill((0, 0, 0))
             self.buttonPressFightScreen()
-            self.startFight()
             self.placeFight()
             
 
@@ -575,8 +586,6 @@ class Fight():
                         self.click = True
 
     def createFight(self):
-        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, "Enemy HP")
-        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, "Player HP")
         self.chooseAction = Button(self.win, (36, 36, 36), 45, self.winHeight - 180, 910, 150)
         self.chooseAttack = Button(self.win, (36, 36, 36), self.chooseAction.getButtonWidth() + 55, self.winHeight - 180, 910, 150)
         self.distictionLine = Button(self.win, (0, 0, 255), 0, 480, 2000, 10, "")
@@ -584,12 +593,9 @@ class Fight():
         self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 435, 60, "Stats")
         self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
 
-
-
-#__init__(self, win, color, x, y, width, height, text = '', textColor = (255, 255, 255), textSize = 50)
-
-
     def placeFight(self):
+        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
+        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, f"{Game().character.aktHP}/{Game().character.maxHP} HP")
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
         pygame.draw.rect(self.win, (0, 0, 255), (1200, self.winHeight - 1000, 550, 300), 10)
@@ -602,13 +608,18 @@ class Fight():
         self.escapeButton.drawButton()
         self.statsButton.drawButton()
         self.enemy1.drawEnemy(1300, 100)
-        Game().character.drawCharacter(200, 600)
-
+        Game().character.drawCharacter(375, 600)
 
     def startFight(self):
         self.Schüler = [r'C:\Users\Noel\Pictures\Mika_Buchholz.png', "Schüler", 10, 10, 1, 1]
         self.Lehrer = [r'C:\Users\Noel\Pictures\Koch.png', "Lehrer", 10, 10, 1, 1]
         self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5])
+
+    def fighting(self, damage): 
+        self.enemy1.takeDamage(damage)
+        if self.enemy1.aktHP < 0:
+            Game().character.xpGain(self.enemy1.xp)
+            self.fightRun = False
 
     def buttonPressFightScreen(self):
         mousePos = pygame.mouse.get_pos()
@@ -616,7 +627,7 @@ class Fight():
         if self.attackButton.checkCollision(mousePos):
             self.attackButton.color = (255, 0, 0)
             if self.click:
-                exit()
+                self.fighting(Game().character.phyDamage)
         else:
             self.attackButton.color = (10, 10, 10)
 

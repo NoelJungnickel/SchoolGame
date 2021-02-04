@@ -29,9 +29,10 @@ class Character():
         self.level += 1
 
     def xpGain(self, gainedXP):
-        self.aktXP += gainedXP
+        self.aktXP += gainedXP 
         if self.aktXP >= self.maxXP:
             self.aktXP -= self.maxXP
+            print(1)
             self.levelUp()
         
     def drawCharacter(self, x, y):
@@ -39,7 +40,7 @@ class Character():
         self.win.blit(self.characterpicture, (x, y))
 
     def getCharacterWidth(self):
-        return self.characterpicture.get_rect().size[1]
+        return self.characterpicture.get_rect().size[0]
 
     def getCharacterHeight(self):
         return self.characterpicture.get_rect().size[1]
