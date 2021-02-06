@@ -4,10 +4,11 @@ from shapeCreator import Entry, Label, Button
 from characterCreator import Character
 from enemyCreator import Enemy
 import time
+from resource import *
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium2.png')
+icon = pygame.image.load(playerPicture)
 
 winName = "Game"
 #winWidth = 1600
@@ -35,7 +36,7 @@ class Game():
         self.vel = 5
         self.characterX = 100
         self.characterY = 100
-        self.character = Character(self.win, self.characterX, self.characterY, r'C:\Users\Noel\Pictures\character.png')
+        self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
 
     """def creator(self):
         self.createOptionsScreen()"""
@@ -611,8 +612,8 @@ class Fight():
         Game().character.drawCharacter(375, 600)
 
     def startFight(self):
-        self.Schüler = [r'C:\Users\Noel\Pictures\Mika_Buchholz.png', "Schüler", 10, 10, 1, 1]
-        self.Lehrer = [r'C:\Users\Noel\Pictures\Koch.png', "Lehrer", 10, 10, 1, 1]
+        self.Schüler = [studentPicture, "Schüler", 10, 10, 1, 1]
+        self.Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
         self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5])
 
     def fighting(self, damage): 

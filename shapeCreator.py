@@ -73,6 +73,8 @@ class Button():
         self.text = text
         self.textColor = textColor
         self.textSize = textSize
+        pygame.font.init()
+        self.font = pygame.font.SysFont('comicsans', self.textSize)
 
     def getButtonWidth(self):
         return self.width
@@ -92,9 +94,8 @@ class Button():
             return False
 
     def drawButton(self):
-        pygame.font.init()
-        font = pygame.font.SysFont('comicsans', self.textSize)
-        text = font.render(self.text, 1, self.textColor)
+
+        text = self.font.render(self.text, 1, self.textColor)
         text_rect = text.get_rect(center=pygame.Rect(self.x, self.y, self.width, self.height).center)
         pygame.draw.rect(self.win, self.color, (self.x, self.y, self.width, self.height))
         self.win.blit(text, text_rect)

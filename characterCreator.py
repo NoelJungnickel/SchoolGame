@@ -19,6 +19,8 @@ class Character():
         self.intDamage = 2
         self.vel = 10
         self.sprintVel = 20
+        self.characterpicture = pygame.image.load(self.picture)
+        self.characterpicture = pygame.transform.scale(self.characterpicture, (300, 300))
 
     def levelUp(self):
         self.maxHP += 1
@@ -36,7 +38,6 @@ class Character():
             self.levelUp()
         
     def drawCharacter(self, x, y):
-        self.characterpicture = pygame.image.load(self.picture)
         self.win.blit(self.characterpicture, (x, y))
 
     def getCharacterWidth(self):

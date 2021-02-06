@@ -1,13 +1,13 @@
 import pygame, sys
 from pygame.locals import *
+from resource import *
 
 
 
 
 
-
-Schüler = [r'C:\Users\Noel\Pictures\Mika_Buchholz.png', "Schüler", 10, 10, 1, 1]
-Lehrer = [r'C:\Users\Noel\Pictures\Koch.png', "Lehrer", 10, 10, 1, 1]
+Schüler = [studentPicture, "Schüler", 10, 10, 1, 1]
+Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
 #Test = ()
 #Klausur = ()
 
@@ -23,9 +23,10 @@ class Enemy():
         self.phyDamage = phyDamage
         self.x = x
         self.y = y
-
-    def drawEnemy(self, x, y):
         self.enemypicture = pygame.image.load(self.picture)
+        self.enemypicture = pygame.transform.scale(self.enemypicture, (300, 300))
+        
+    def drawEnemy(self, x, y):   
         self.win.blit(self.enemypicture, (x, y))
     
     def takeDamage(self, damage):
