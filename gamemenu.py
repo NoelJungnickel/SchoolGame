@@ -3,10 +3,11 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from game import Game
 from characterCreator import Character
+from resource import *
 
 pygame.init()
 
-icon = pygame.image.load(r'C:\Users\Noel\Pictures\Kochium.png') #Icon
+icon = pygame.image.load(playerPicture) #Icon
 
 winName = "Start"
 #winWidth = 1600
