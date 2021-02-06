@@ -5,6 +5,7 @@ from characterCreator import Character
 from enemyCreator import Enemy
 import time
 from resource import *
+from screen import *
 
 pygame.init()
 
@@ -37,10 +38,53 @@ class Game():
         self.characterX = 100
         self.characterY = 100
         self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
+        self.firstScreen = Screen1()
+        self.screen2 = Screen2()
+        self.NotImplemntedScreen = NotImplemntedScreen()
+ 
+        self.currentScreen = 0
+
+    def getCurrentScreen(self):
+        if self.currentScreen == 0:
+            return self.firstScreen
+        if self.currentScreen == 1:
+            return self.screen2
+        else:
+            return self.NotImplemntedScreen
+
 
     """def creator(self):
         self.createOptionsScreen()"""
         
+    def gameLoop(self):
+        self.createOptionsScreen()
+        
+        while self.gameRun:
+            self.clock.tick(self.FPS)
+            self.win.fill((100, 204, 204))
+            
+            self.getCurrentScreen().render(self.win)
+            
+            self.placeGame()
+            self.keyPressGame()
+
+
+            pygame.display.update()
+            self.click = False
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.startRun = False
+                if self.getCurrentScreen().checkCollision(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight().fightLoop()
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        self.escScreen()
+                if event.type == MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.click = True
+
+
     def mainloopGame1(self):
         self.createOptionsScreen()
 
@@ -58,6 +102,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight().fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -267,9 +314,11 @@ class Game():
 
     def loadMainloop(self):
         if self.gridX == 1 and self.gridY == 1:
-            self.mainloopGame1()
+            self.currentScreen = 0
+            self.gameLoop()
         elif self.gridX == 2 and self.gridY == 1:
-            self.mainloopGame2()
+            self.currentScreen = 1
+            self.gameLoop()
         elif self.gridX == 3 and self.gridY == 1:
             self.mainloopGame3()
         elif self.gridX == 1 and self.gridY == 2:
@@ -618,7 +667,7 @@ class Fight():
 
     def fighting(self, damage): 
         self.enemy1.takeDamage(damage)
-        if self.enemy1.aktHP < 0:
+        if self.enemy1.aktHP <= 0:
             Game().character.xpGain(self.enemy1.xp)
             self.fightRun = False
 

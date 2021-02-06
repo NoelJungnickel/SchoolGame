@@ -23,15 +23,19 @@ class Character():
         self.characterpicture = pygame.transform.scale(self.characterpicture, (300, 300))
 
     def levelUp(self):
+        print("levelUp")
         self.maxHP += 1
         self.maxEP += 1
         self.maxXP += 1
         self.phyDamage += 1
         self.intDamage += 1
         self.level += 1
+        print("NewLevel: " + str(self.level))
 
     def xpGain(self, gainedXP):
-        self.aktXP += gainedXP 
+        print("xpGain: " + str(gainedXP))
+        self.aktXP += gainedXP
+        
         if self.aktXP >= self.maxXP:
             self.aktXP -= self.maxXP
             print(1)

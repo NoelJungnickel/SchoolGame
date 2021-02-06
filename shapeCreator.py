@@ -49,6 +49,9 @@ class Entry():
 
 class Label():
     def __init__(self, win, text, x, y, color = (255, 255, 255), fontSize = 50):
+        
+        print("creatingLabel with text: " + text)
+
         pygame.font.init()
         self.mainFont = pygame.font.SysFont('comicsans', fontSize)
         
@@ -59,8 +62,29 @@ class Label():
         self.win = win
 
     def drawLetter(self):
-        self.label = self.mainFont.render(self.text, 1, self.color)
+        self.label = self.mainFont.render(self.text, 1 ,self.color)
         self.win.blit(self.label, (self.x, self.y))
+
+
+class LabelAlt():
+    def __init__(self, text, x, y, color = (255, 255, 255), fontSize = 50):
+        
+        print("creatingLabel with text: " + text)
+
+        pygame.font.init()
+        self.mainFont = pygame.font.SysFont('comicsans', fontSize)
+        
+        self.text = text
+        self.color = color
+        self.x = x
+        self.y = y 
+
+    def setText(self, text):
+        self.text = text
+
+    def render(self, win):
+        self.label = self.mainFont.render(self.text, 1 ,self.color)
+        win.blit(self.label, (self.x, self.y))
 
 class Button():
     def __init__(self, win, color, x, y, width, height, text = '', textColor = (255, 255, 255), textSize = 50):
@@ -99,3 +123,33 @@ class Button():
         text_rect = text.get_rect(center=pygame.Rect(self.x, self.y, self.width, self.height).center)
         pygame.draw.rect(self.win, self.color, (self.x, self.y, self.width, self.height))
         self.win.blit(text, text_rect)
+
+
+
+class ButtonAlt():
+    def __init__(self,   color, x, y, width, height, text = '', textColor = (255, 255, 255), textSize = 50):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color 
+        self.text = text
+        self.textColor = textColor
+        self.textSize = textSize
+        pygame.font.init()
+        self.font = pygame.font.SysFont('comicsans', self.textSize)
+
+    def getButtonWidth(self):
+        return self.width
+
+    def checkCollision(self, mousePos):
+        return pygame.Rect(self.x, self.y, self.width, self.height).collidepoint(mousePos) == 1 
+
+    def checkCollisionRect(self, rectPos):
+        return pygame.Rect(self.x, self.y, self.width, self.height).colliderect(rectPos) == 1 
+
+    def render(self, win): 
+        text = self.font.render(self.text, 1, self.textColor)
+        text_rect = text.get_rect(center=pygame.Rect(self.x, self.y, self.width, self.height).center)
+        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
+        win.blit(text, text_rect)

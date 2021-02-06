@@ -4,7 +4,7 @@ from shapeCreator import Entry, Label, Button
 from game import Game
 from characterCreator import Character
 from resource import *
-
+from screen import *
 pygame.init()
 
 icon = pygame.image.load(playerPicture) #Icon
@@ -72,7 +72,7 @@ class GameMenu():
             self.startButton.color = (0, 255, 0)
             if self.click:
                 #Game().creator()
-                Game().mainloopGame1()
+                Game().gameLoop()
         else:
             self.startButton.color = (36, 36, 36)
         
