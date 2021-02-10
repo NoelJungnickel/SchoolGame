@@ -2,10 +2,6 @@ import pygame, sys
 from pygame.locals import *
 from resource import *
 
-
-
-
-
 Schüler = [studentPicture, "Schüler", 10, 10, 1, 1]
 Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
 #Test = ()
@@ -31,9 +27,3 @@ class Enemy():
     
     def takeDamage(self, damage):
         self.aktHP -= damage
-
-
-#enemy1 = Enemy(Schüler[0], Schüler[1], Schüler[2], Schüler[3], Schüler[4], Schüler[5])
-#print(enemy1.maxHP)
-
-

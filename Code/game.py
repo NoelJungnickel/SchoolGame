@@ -37,9 +37,6 @@ class Game():
         self.characterX = 100
         self.characterY = 100
         self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
-
-    """def creator(self):
-        self.createOptionsScreen()"""
         
     def mainloopGame1(self):
         self.createOptionsScreen()

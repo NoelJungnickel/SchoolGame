@@ -51,7 +51,6 @@ class Label():
     def __init__(self, win, text, x, y, color = (255, 255, 255), fontSize = 50):
         pygame.font.init()
         self.mainFont = pygame.font.SysFont('comicsans', fontSize)
-        
         self.text = text
         self.color = color
         self.x = x
@@ -94,7 +93,6 @@ class Button():
             return False
 
     def drawButton(self):
-
         text = self.font.render(self.text, 1, self.textColor)
         text_rect = text.get_rect(center=pygame.Rect(self.x, self.y, self.width, self.height).center)
         pygame.draw.rect(self.win, self.color, (self.x, self.y, self.width, self.height))
