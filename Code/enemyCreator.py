@@ -8,14 +8,13 @@ Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
 #Klausur = ()
 
 class Enemy():
-    def __init__(self, win, x, y, picture, name, maxHP, aktHP, level, phyDamage, defense):
+    def __init__(self, win, x, y, picture, name, maxHP, aktHP, xp, phyDamage, defense):
         self.win = win
         self.picture = picture
         self.name = name
         self.maxHP = maxHP
         self.aktHP = aktHP
-        self.xp = 20
-        self.level = level
+        self.xp = xp
         self.phyDamage = phyDamage
         self.defense = defense
         self.x = x

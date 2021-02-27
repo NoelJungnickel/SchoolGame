@@ -39,6 +39,12 @@ class Game():
         self.characterX = 100
         self.characterY = 100
         self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
+        self.testPicture = pygame.image.load(testPicture)
+        self.studentPicture = pygame.image.load(studentPicture)
+        self.examPicture = pygame.image.load(examPicture)
+        self.teacherPicture = pygame.image.load(teacherPicture)
+        self.principlePicture = pygame.image.load(principlePicture)
+        self.finalsPicture = pygame.image.load(finalssPicture)
         
     def mainloopGame1(self):
         self.createOptionsScreen()
@@ -49,8 +55,8 @@ class Game():
             self.win.blit(self.room1Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
-            self.screen1 = Label(self.win, "1", 500, 500, (255, 0, 0), 200)
-            self.screen1.drawLetter()
+            #self.screen1 = Label(self.win, "1", 500, 500, (255, 0, 0), 200)
+            #self.screen1.drawLetter()
 
             pygame.display.update()
 
@@ -71,6 +77,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room2Picture, (0, 0))
+            self.createEnemies(self, test)
             self.placeGame()
             self.keyPressGame()
             self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
@@ -272,6 +279,22 @@ class Game():
 
     def placeGame(self):
         self.character.drawCharacter(self.character.x, self.character.y)
+
+    def createEnemies(self, enemyType):
+        if enemyType == test:
+            self.win.blit(self.testPicture, (0, 0))
+        elif enemyType == student:
+            self.win.blit(self.studentPicture, (0, 0))
+        elif enemyType == exam:
+            self.win.blit(self.examPicture, (0, 0))
+        elif enemyType == teacher:
+            self.win.blit(self.teacherPicture, (0, 0))
+        elif enemyType == principle:
+            self.win.blit(self.principlePicture, (0, 0))
+        elif enemyType == finals:
+            self.win.blit(self.finalsPicture, (0, 0))
+    
+    def triggerFight(self, enemyType)
 
     def loadMainloop(self):
         if self.gridX == 1 and self.gridY == 1:
@@ -561,7 +584,7 @@ class Game():
             self.backButtonInventoryScreen.color = (36, 36, 36)
 
 class Fight():
-    def __init__(self, character):
+    def __init__(self, character, enemyType):
         self.win = win
         self.winName = winName
         self.gameRun = True
@@ -573,6 +596,7 @@ class Fight():
         self.character = character
         self.death = False
         self.deathCounter = 0
+        self.enemyType = enemyType
 
     def fightLoop(self):
         self.startFight()
@@ -629,12 +653,24 @@ class Fight():
                 self.fightRun = False
 
     def startFight(self):
-        self.Schüler = [studentPicture, "Test",                       50, 50, 1, 12, 8]
-        self.Test = [studentPicture, "Schüler",              100, 100, 1, 25, 10]
-        #self.Klausur = [examPicture, "Klausur",                 150, 100, 1, 40, 24]
-        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 1, 55, 42]
-        #self.Schulleiter = [principlePicture, "Schulleiter",    250, 250, 1, 70, 56]
-        self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5], self.Schüler[6])
+        self.Test = [studentPicture, "Test",                       50, 50, 15, 12, 8]
+        self.Schüler = [studentPicture, "Schüler",              100, 100, 20, 25, 10]
+        #self.Klausur = [examPicture, "Klausur",                 150, 100, 30, 40, 24]
+        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 45, 55, 42]
+        #self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 250, 80, 56]
+        #self.Abitur = [finalsPicture, "Abitur",                600, 600, 3000, 120, 80]
+        if enemyType == test:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Test[0], self.Test[1], self.Test[2], self.Test[3], self.Test[4], self.Test[5], self.Test[6])
+        if enemyType == student:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5], self.Schüler[6])
+        if enemyType == exam:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Klausur[0], self.Klausur[1], self.Klausur[2], self.Klausur[3], self.Klausur[4], self.Klausur[5], self.Klausur[6])
+        if enemyType == teacher:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Lehrer[0], self.Lehrer[1], self.Lehrer[2], self.Lehrer[3], self.Lehrer[4], self.Lehrer[5], self.Lehrer[6])
+        if enemyType == principle:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Schulleiter[0], self.Schulleiter[1], self.Schulleiter[2], self.Schulleiter[3], self.Schulleiter[4], self.Schulleiter[5], self.Schulleiter[6])
+        if enemyType == finals:
+            self.enemy1 = Enemy(self.win, 1300, 100, self.Abitur[0], self.Abitur[1], self.Abitur[2], self.Abitur[3], self.Abitur[4], self.Abitur[5], self.Abitur[6])
 
     def fighting(self, damage, enemyDmg): 
         self.enemy1.takeDamage(damage)

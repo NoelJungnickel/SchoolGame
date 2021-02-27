@@ -9,7 +9,7 @@ class Character():
         self.picture = picture
         self.name = None
         self.maxHP = 100
-        self.aktHP = 10
+        self.aktHP = 100
         self.maxEP = 10
         self.aktEP = 10
         self.maxXP = 10
@@ -21,12 +21,13 @@ class Character():
         self.vel = 10
         self.sprintVel = 20
         self.characterpicture = pygame.image.load(self.picture)
-        self.characterpicture = pygame.transform.scale(self.characterpicture, (300, 300))
+        #self.characterpicture = pygame.transform.scale(self.characterpicture, (300, 300))
 
     def levelUp(self):
         self.maxHP += 10
         self.maxEP += 1
-        self.maxXP += 10
+        self.maxXP += 20
+        self.aktHP += 10
         if self.level%2 == 0:
             self.phyDamage += 2
             self.intDamage += 2
