@@ -39,18 +39,10 @@ class Game():
         self.characterX = 100
         self.characterY = 100
         self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
-        self.room1Picture = pygame.image.load(room1Picture)
-        self.room2Picture = pygame.image.load(room2Picture)
-        self.room3Picture = pygame.image.load(room3Picture)
-        self.room4Picture = pygame.image.load(room4Picture)
-        self.room5Picture = pygame.image.load(room5Picture)
-        self.room6Picture = pygame.image.load(room6Picture)
-        self.room7Picture = pygame.image.load(room7Picture)
-        self.room8Picture = pygame.image.load(room8Picture)
-        self.room9Picture = pygame.image.load(room9Picture)
         
     def mainloopGame1(self):
         self.createOptionsScreen()
+        self.room1Picture = pygame.image.load(room1Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
@@ -74,10 +66,11 @@ class Game():
                         self.click = True
 
     def mainloopGame2(self):
+        self.room2Picture = pygame.image.load(room2Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room2Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
@@ -103,10 +96,11 @@ class Game():
                         self.click = True
 
     def mainloopGame3(self):
+        self.room3Picture = pygame.image.load(room3Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room3Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen3 = Label(self.win, "3", 500, 500, (255, 0, 0), 200)
@@ -126,10 +120,11 @@ class Game():
                         self.click = True
 
     def mainloopGame4(self):
+        self.room4Picture = pygame.image.load(room4Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room4Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen4= Label(self.win, "4", 500, 500, (255, 0, 0), 200)
@@ -149,10 +144,11 @@ class Game():
                         self.click = True
 
     def mainloopGame5(self):
+        self.room5Picture = pygame.image.load(room5Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room5Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
@@ -179,10 +175,11 @@ class Game():
                         self.click = True
 
     def mainloopGame6(self):
+        self.room6Picture = pygame.image.load(room6Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room6Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen6 = Label(self.win, "6", 500, 500, (255, 0, 0), 200)
@@ -202,10 +199,11 @@ class Game():
                         self.click = True
 
     def mainloopGame7(self):
+        self.room7Picture = pygame.image.load(room7Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room7Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen7 = Label(self.win, "7", 500, 500, (255, 0, 0), 200)
@@ -225,10 +223,11 @@ class Game():
                         self.click = True
 
     def mainloopGame8(self):
+        self.room8Picture = pygame.image.load(room8Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room8Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen8 = Label(self.win, "8", 500, 500, (255, 0, 0), 200)
@@ -248,10 +247,11 @@ class Game():
                         self.click = True
 
     def mainloopGame9(self):
+        self.room9Picture = pygame.image.load(room9Picture)
   
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room9Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen9 = Label(self.win, "9", 500, 500, (255, 0, 0), 200)

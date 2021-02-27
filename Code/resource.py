@@ -1,16 +1,7 @@
-
-
-
-
-#playerPicture = r'.\pics\Kochium.jpg'
-#studentPicture = r'.\pics\Mika_Buchholz.png'
-#teacherPicture = r'.\pics\Koch.jpg'
-#characterPicture = r'.\pics\character.png'
-
-playerPicture = r'.\pics\Huhn.png'
+playerPicture = r'.\pics\characterfront2.png'
 studentPicture = r'.\pics\Schwein.png'
 teacherPicture = r'.\pics\Kuh.png'
-characterPicture = r'.\pics\Huhn.png'
+characterPicture = r'.\pics\characterfront2.png'
 
 room1Picture = r'.\pics\room1.png'
 room2Picture = r'.\pics\room2.png'
