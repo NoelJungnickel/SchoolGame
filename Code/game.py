@@ -44,7 +44,7 @@ class Game():
         self.examPicture = pygame.image.load(examPicture)
         self.teacherPicture = pygame.image.load(teacherPicture)
         self.principlePicture = pygame.image.load(principlePicture)
-        self.finalsPicture = pygame.image.load(finalssPicture)
+        self.finalsPicture = pygame.image.load(finalsPicture)
         
     def mainloopGame1(self):
         self.createOptionsScreen()
@@ -77,7 +77,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room2Picture, (0, 0))
-            self.createEnemies(self, test)
+            self.createEnemies("test")
             self.placeGame()
             self.keyPressGame()
             self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
@@ -108,6 +108,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room3Picture, (0, 0))
+            self.createEnemies("student")
             self.placeGame()
             self.keyPressGame()
             self.screen3 = Label(self.win, "3", 500, 500, (255, 0, 0), 200)
@@ -132,6 +133,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room4Picture, (0, 0))
+            self.createEnemies("test")
             self.placeGame()
             self.keyPressGame()
             self.screen4= Label(self.win, "4", 500, 500, (255, 0, 0), 200)
@@ -156,6 +158,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room5Picture, (0, 0))
+            self.createEnemies("exam")
             self.placeGame()
             self.keyPressGame()
             self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
@@ -187,6 +190,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room6Picture, (0, 0))
+            self.createEnemies("teacher")
             self.placeGame()
             self.keyPressGame()
             self.screen6 = Label(self.win, "6", 500, 500, (255, 0, 0), 200)
@@ -211,6 +215,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room7Picture, (0, 0))
+            self.createEnemies("student")
             self.placeGame()
             self.keyPressGame()
             self.screen7 = Label(self.win, "7", 500, 500, (255, 0, 0), 200)
@@ -235,6 +240,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room8Picture, (0, 0))
+            self.createEnemies("teacher")
             self.placeGame()
             self.keyPressGame()
             self.screen8 = Label(self.win, "8", 500, 500, (255, 0, 0), 200)
@@ -259,6 +265,7 @@ class Game():
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room9Picture, (0, 0))
+            self.createEnemies("principle")
             self.placeGame()
             self.keyPressGame()
             self.screen9 = Label(self.win, "9", 500, 500, (255, 0, 0), 200)
@@ -281,20 +288,20 @@ class Game():
         self.character.drawCharacter(self.character.x, self.character.y)
 
     def createEnemies(self, enemyType):
-        if enemyType == test:
+        if enemyType == "test":
             self.win.blit(self.testPicture, (0, 0))
-        elif enemyType == student:
+        elif enemyType == "student":
             self.win.blit(self.studentPicture, (0, 0))
-        elif enemyType == exam:
+        elif enemyType == "exam":
             self.win.blit(self.examPicture, (0, 0))
-        elif enemyType == teacher:
+        elif enemyType == "teacher":
             self.win.blit(self.teacherPicture, (0, 0))
-        elif enemyType == principle:
+        elif enemyType == "principle":
             self.win.blit(self.principlePicture, (0, 0))
-        elif enemyType == finals:
-            self.win.blit(self.finalsPicture, (0, 0))
+            self.win.blit(self.finalsPicture, (400, 0))
     
-    def triggerFight(self, enemyType)
+    def triggerFight(self, enemyType):
+        pass
 
     def loadMainloop(self):
         if self.gridX == 1 and self.gridY == 1:

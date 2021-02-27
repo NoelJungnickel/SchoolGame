@@ -1,7 +1,11 @@
 playerPicture = r'.\pics\characterfront2.png'
-studentPicture = r'.\pics\Schwein.png'
-teacherPicture = r'.\pics\Kuh.png'
 characterPicture = r'.\pics\characterfront2.png'
+studentPicture = r'.\pics\student.png'
+teacherPicture = r'.\pics\teacher.png'
+principlePicture = r'.\pics\principle.png'
+testPicture = r'.\pics\test.png'
+examPicture = r'.\pics\exam.png'
+finalsPicture = r'.\pics\finals.png'
 
 room1Picture = r'.\pics\room1.png'
 room2Picture = r'.\pics\room2.png'
