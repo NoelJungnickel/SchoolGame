@@ -83,7 +83,7 @@ class Game():
                     self.startRun = False
                 if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
-                        Fight().fightLoop()
+                        Fight(self.character).fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -550,7 +550,7 @@ class Game():
             self.backButtonInventoryScreen.color = (36, 36, 36)
 
 class Fight():
-    def __init__(self):
+    def __init__(self, character):
         self.win = win
         self.winName = winName
         self.gameRun = True
@@ -559,6 +559,7 @@ class Fight():
         self.winWidth = winWidth
         self.winHeight = winHeight
         self.click = False
+        self.character = character
 
     def fightLoop(self):
         self.startFight()
@@ -606,7 +607,7 @@ class Fight():
         self.escapeButton.drawButton()
         self.statsButton.drawButton()
         self.enemy1.drawEnemy(1300, 100)
-        Game().character.drawCharacter(375, 600)
+        self.character.drawCharacter(375, 600)
 
     def startFight(self):
         self.Schüler = [studentPicture, "Schüler", 10, 10, 1, 1]
@@ -616,7 +617,7 @@ class Fight():
     def fighting(self, damage): 
         self.enemy1.takeDamage(damage)
         if self.enemy1.aktHP < 0:
-            Game().character.xpGain(self.enemy1.xp)
+            self.character.xpGain(self.enemy1.xp)
             self.fightRun = False
 
     def buttonPressFightScreen(self):
@@ -625,7 +626,7 @@ class Fight():
         if self.attackButton.checkCollision(mousePos):
             self.attackButton.color = (255, 0, 0)
             if self.click:
-                self.fighting(Game().character.phyDamage)
+                self.fighting(self.character.phyDamage)
         else:
             self.attackButton.color = (10, 10, 10)
 
