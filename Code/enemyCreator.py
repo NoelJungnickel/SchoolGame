@@ -8,7 +8,7 @@ Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
 #Klausur = ()
 
 class Enemy():
-    def __init__(self, win, x, y, picture, name, maxHP, aktHP, level, phyDamage):
+    def __init__(self, win, x, y, picture, name, maxHP, aktHP, level, phyDamage, defense):
         self.win = win
         self.picture = picture
         self.name = name
@@ -17,6 +17,7 @@ class Enemy():
         self.xp = 20
         self.level = level
         self.phyDamage = phyDamage
+        self.defense = defense
         self.x = x
         self.y = y
         self.enemypicture = pygame.image.load(self.picture)
@@ -26,4 +27,5 @@ class Enemy():
         self.win.blit(self.enemypicture, (x, y))
     
     def takeDamage(self, damage):
-        self.aktHP -= damage
+
+        self.aktHP -= (damage - (self.defense/2))

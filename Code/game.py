@@ -3,7 +3,8 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from characterCreator import Character
 from enemyCreator import Enemy
-import time
+from time import sleep
+from random import randint
 from resource import *
 
 pygame.init()
@@ -20,6 +21,7 @@ pygame.display.set_caption(winName)
 #win = pygame.display.set_mode((winWidth, winHeight))
 win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
+
             
 class Game():
     def __init__(self):
@@ -37,13 +39,22 @@ class Game():
         self.characterX = 100
         self.characterY = 100
         self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
+        self.room1Picture = pygame.image.load(room1Picture)
+        self.room2Picture = pygame.image.load(room2Picture)
+        self.room3Picture = pygame.image.load(room3Picture)
+        self.room4Picture = pygame.image.load(room4Picture)
+        self.room5Picture = pygame.image.load(room5Picture)
+        self.room6Picture = pygame.image.load(room6Picture)
+        self.room7Picture = pygame.image.load(room7Picture)
+        self.room8Picture = pygame.image.load(room8Picture)
+        self.room9Picture = pygame.image.load(room9Picture)
         
     def mainloopGame1(self):
         self.createOptionsScreen()
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.fill((204, 204, 204))
+            self.win.blit(self.room1Picture, (0, 0))
             self.placeGame()
             self.keyPressGame()
             self.screen1 = Label(self.win, "1", 500, 500, (255, 0, 0), 200)
@@ -560,6 +571,8 @@ class Fight():
         self.winHeight = winHeight
         self.click = False
         self.character = character
+        self.death = False
+        self.deathCounter = 0
 
     def fightLoop(self):
         self.startFight()
@@ -591,10 +604,11 @@ class Fight():
         self.attackButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 170, 880, 60, "Attack")
         self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 435, 60, "Stats")
         self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
+        self.deathLabel = Label(self.win, "Your free trial of life has ended", 400, 500, (255, 0, 0), 100)
 
     def placeFight(self):
         self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
-        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, f"{Game().character.aktHP}/{Game().character.maxHP} HP")
+        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, f"{self.character.aktHP}/{self.character.maxHP} HP")
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
         pygame.draw.rect(self.win, (0, 0, 255), (1200, self.winHeight - 1000, 550, 300), 10)
@@ -608,17 +622,33 @@ class Fight():
         self.statsButton.drawButton()
         self.enemy1.drawEnemy(1300, 100)
         self.character.drawCharacter(375, 600)
+        if self.death == True:
+            self.deathLabel.drawLetter()
+            self.deathCounter += 1
+            if self.deathCounter > 180:
+                self.fightRun = False
 
     def startFight(self):
-        self.Schüler = [studentPicture, "Schüler", 10, 10, 1, 1]
-        self.Lehrer = [teacherPicture, "Lehrer", 10, 10, 1, 1]
-        self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5])
+        self.Schüler = [studentPicture, "Test",                       50, 50, 1, 12, 8]
+        self.Test = [studentPicture, "Schüler",              100, 100, 1, 25, 10]
+        #self.Klausur = [examPicture, "Klausur",                 150, 100, 1, 40, 24]
+        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 1, 55, 42]
+        #self.Schulleiter = [principlePicture, "Schulleiter",    250, 250, 1, 70, 56]
+        self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5], self.Schüler[6])
 
-    def fighting(self, damage): 
+    def fighting(self, damage, enemyDmg): 
         self.enemy1.takeDamage(damage)
-        if self.enemy1.aktHP < 0:
+        self.character.takeDamage(enemyDmg)
+        if self.enemy1.aktHP <= 0:
             self.character.xpGain(self.enemy1.xp)
             self.fightRun = False
+        elif self.character.aktHP <= 0:
+            self.death = True
+            self.enemy1.defense = 1000
+
+            #sleep(5)
+            #self.fightRun = False
+            
 
     def buttonPressFightScreen(self):
         mousePos = pygame.mouse.get_pos()
@@ -626,7 +656,7 @@ class Fight():
         if self.attackButton.checkCollision(mousePos):
             self.attackButton.color = (255, 0, 0)
             if self.click:
-                self.fighting(self.character.phyDamage)
+                self.fighting(self.character.phyDamage, self.enemy1.phyDamage)
         else:
             self.attackButton.color = (10, 10, 10)
 
