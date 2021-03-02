@@ -724,14 +724,14 @@ class Fight():
         self.attackButton.drawButton()
         self.escapeButton.drawButton()
         self.statsButton.drawButton()
-        self.enemy1.drawEnemy(1300, 100)
-        self.character.drawCharacter(375, 600)
-        if self.death == True:              
-            self.deathLabel.drawLetter()
-            self.deathCounter += 1
-            if self.deathCounter > 180:
-                self.fightRun = False
-                Game().mainloopGame1()
+        self.enemy1.drawEnemy(1410, 120)
+        self.character.drawCharacter(360, 600)
+        if self.death == True: #wenn "death" wahr ist
+            self.deathLabel.drawLetter() #wird das "deathLabel" angezeigt
+            self.deathCounter += 1 #der deathCounter um 1 erhöht 
+            if self.deathCounter > 180: #wenn der "deathCounter" größer als 180 ist
+                self.fightRun = False #wird "fightRun" falsch gesetzt
+                Game().mainloopGame1() #und die "mainloopGame1" ausgeführt
         if self.victory == True:              
             self.victoryLabel.drawLetter()
             self.winCounter += 1
@@ -749,7 +749,7 @@ class Fight():
         self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 60, 55, 42]       #alle Gegner werden erstellt
         self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 300, 80, 56]      #alle Gegner werden erstellt
         self.Abitur = [finalsPicture, "Abitur",                600, 600, 3000, 120, 80]     #alle Gegner werden erstellt
-        if self.enemyType == "test":                                                                                                                        #if -Statements, die Entscheiden welcher Gegner erstellt wird
+        if self.enemyType == "test":                                                        #if -Statements, die Entscheiden welcher Gegner erstellt wird
             self.enemy1 = Enemy(self.win, 1300, 100, self.Test[0], self.Test[1], self.Test[2], self.Test[3], self.Test[4], self.Test[5], self.Test[6])
         if self.enemyType == "student":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5], self.Schüler[6])
