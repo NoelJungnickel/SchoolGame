@@ -16,7 +16,6 @@ class Enemy():
         self.x = x
         self.y = y
         self.enemypicture = pygame.image.load(self.picture)
-        #self.enemypicture = pygame.transform.scale(self.enemypicture, (300, 300))
     
     #Methode die den Gegenr erstellt
     def drawEnemy(self, x, y):   

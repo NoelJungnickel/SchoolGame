@@ -1,4 +1,4 @@
-#in dieser Datei werden die Bilder aus dem "pics" Ordner als Variablen festgelegt, um sie später in das Spile einzufügen
+#In dieser Datei werden die Bilder aus dem "pics" Ordner als Variablen festgelegt, um sie später in das Spile einzufügen
 
 playerPicture = r'.\pics\characterfront2.png'
 characterPicture = r'.\pics\characterfront2.png'

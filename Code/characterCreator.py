@@ -22,7 +22,6 @@ class Character():
         self.vel = 10
         self.sprintVel = 20
         self.characterpicture = pygame.image.load(self.picture)
-        #self.characterpicture = pygame.transform.scale(self.characterpicture, (300, 300))
 
     #Methode die die Werte des Character erhöht
     def levelUp(self):

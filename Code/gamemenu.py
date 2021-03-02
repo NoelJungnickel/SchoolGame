@@ -166,7 +166,7 @@ class GameMenu():
         for entry in self.entryList:
             entry.drawEntry()
 
-    #Methode in der die Funktion der Buttons erstellt wird
+    #Methode in der die Funktion der Knöpfe erstellt wird
     def buttonPressOptionsScreen(self):
         mousePos = pygame.mouse.get_pos()
 

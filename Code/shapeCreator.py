@@ -103,7 +103,7 @@ class Button():
         else:
             return False
 
-    #Methode in der die Buttons erstellt werden
+    #Methode in der die Knöpfe erstellt werden
     def drawButton(self):
         text = self.font.render(self.text, 1, self.textColor)
         text_rect = text.get_rect(center=pygame.Rect(self.x, self.y, self.width, self.height).center)

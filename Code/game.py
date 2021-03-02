@@ -858,7 +858,7 @@ class Fight():
         self.defense.drawButton()
         self.vel.drawButton()
 
-    #Methode in der die Funktion der Buttons erstellt wird
+    #Methode in der die Funktion der Knöpfe erstellt wird
     def buttonPressInventoryScreen(self):
         mousePos = pygame.mouse.get_pos()
 
