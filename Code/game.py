@@ -3,7 +3,6 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from characterCreator import Character
 from enemyCreator import Enemy
-from time import sleep
 from random import randint
 from resource import *
 
@@ -22,7 +21,7 @@ pygame.display.set_caption(winName)
 win = pygame.display.set_mode((winWidth, winHeight), pygame.FULLSCREEN)
 pygame.display.set_icon(icon)
 
-            
+#Klasse die ein Game erstellt
 class Game():
     def __init__(self):
         self.win = win
@@ -36,27 +35,32 @@ class Game():
         self.gridX = 1
         self.gridY = 1
         self.vel = 5
-        self.characterX = 100
-        self.characterY = 100
-        self.character = Character(self.win, self.characterX, self.characterY, characterPicture)
-        self.testPicture = pygame.image.load(testPicture)
+        self.characterX = 450
+        self.characterY = 250
+        self.character = Character(self.win, self.characterX, self.characterY, characterPicture) #Character wird erstellt
+        self.testPicture = pygame.image.load(testPicture) #Bild wird in das Spile geladen
         self.studentPicture = pygame.image.load(studentPicture)
         self.examPicture = pygame.image.load(examPicture)
         self.teacherPicture = pygame.image.load(teacherPicture)
         self.principlePicture = pygame.image.load(principlePicture)
         self.finalsPicture = pygame.image.load(finalsPicture)
-        
-    def mainloopGame1(self):
         self.createOptionsScreen()
+        
+    #Methode die den ersten Screen öffnet
+    def mainloopGame1(self):
         self.room1Picture = pygame.image.load(room1Picture)
+        self.heal = False
 
         while self.gameRun:
             self.clock.tick(self.FPS)
-            self.win.blit(self.room1Picture, (0, 0))
+            self.win.blit(self.room1Picture, (0, 0)) #das Bild wird auf den Bildschirm platziert
             self.placeGame()
             self.keyPressGame()
-            #self.screen1 = Label(self.win, "1", 500, 500, (255, 0, 0), 200)
-            #self.screen1.drawLetter()
+            self.Bett = Button(self.win, (0, 0, 0), 150, 50, 800, 400)
+            self.healLabel = Label(self.win, "Du wurdest vollständig geheilt", 400, 500, (0, 255, 0), 100)
+            
+            if self.heal == True:
+                self.healLabel.drawLetter()
 
             pygame.display.update()
 
@@ -64,6 +68,10 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if self.Bett.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Bett kolidiert
+                    if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
+                        self.character.fullHeal() #character wird voll geheilt
+                        self.heal = True
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -71,20 +79,20 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den zweiten Screen öffnet
     def mainloopGame2(self):
         self.room2Picture = pygame.image.load(room2Picture)
 
         while self.gameRun:
             self.clock.tick(self.FPS)
             self.win.blit(self.room2Picture, (0, 0))
-            self.createEnemies("test")
+            self.createEnemies("test") #gegner "test" wird erstellt
             self.placeGame()
             self.keyPressGame()
-            self.screen2 = Label(self.win, "2", 500, 500, (255, 0, 0), 200)
-            self.screen2.drawLetter()
 
-            self.triggerFight = Button(self.win, (255, 255, 255), 600, 600, 80, 50, text = 'FIGHT', textColor = (0, 0, 255), textSize = 50)
-            self.triggerFight.drawButton()
+            #self.triggerFight = Enemy(self.win, 900, 500, testPicture).enemyToRect()
+            #self.triggerFight.pygame.draw.rect()
+
 
             pygame.display.update()
 
@@ -92,9 +100,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
-                if self.triggerFight.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character).fightLoop()
+                if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Gegner kolidiert
+                    if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
+                        Fight(self.character,"test").fightLoop() #öffnet den Fightscreen mit dem Gegner "test"
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -102,6 +110,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den dritten Screen öffnet
     def mainloopGame3(self):
         self.room3Picture = pygame.image.load(room3Picture)
 
@@ -111,8 +120,6 @@ class Game():
             self.createEnemies("student")
             self.placeGame()
             self.keyPressGame()
-            self.screen3 = Label(self.win, "3", 500, 500, (255, 0, 0), 200)
-            self.screen3.drawLetter()
 
             pygame.display.update()
 
@@ -120,6 +127,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"student").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -127,6 +137,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den vierten Screen öffnet
     def mainloopGame4(self):
         self.room4Picture = pygame.image.load(room4Picture)
 
@@ -136,8 +147,6 @@ class Game():
             self.createEnemies("test")
             self.placeGame()
             self.keyPressGame()
-            self.screen4= Label(self.win, "4", 500, 500, (255, 0, 0), 200)
-            self.screen4.drawLetter()
 
             pygame.display.update()
 
@@ -145,6 +154,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"test").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -152,6 +164,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den fünften Screen öffnet
     def mainloopGame5(self):
         self.room5Picture = pygame.image.load(room5Picture)
 
@@ -160,16 +173,14 @@ class Game():
             self.win.blit(self.room5Picture, (0, 0))
             self.createEnemies("exam")
             self.placeGame()
-            self.keyPressGame()
-            self.screen5 = Label(self.win, "5", 500, 500, (255, 0, 0), 200)
-            self.screen5.drawLetter()
-
-            self.levelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'levelUp', textColor = (0, 0, 255), textSize = 50)
-            self.levelUp.drawButton()
-            self.level = Label(self.win, str(self.character.level), 800, 500, (0, 255, 0), 200)
-            self.level.drawLetter()
-            if self.levelUp.checkCollisionRect(self.character.characterToRect()):
-                self.character.levelUp()
+            self.keyPressGame()          
+            
+            #self.levelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'levelUp', textColor = (0, 0, 255), textSize = 50)
+            #self.levelUp.drawButton()
+            #self.level = Label(self.win, str(self.character.level), 800, 500, (0, 255, 0), 200)
+            #self.level.drawLetter()
+            #if self.levelUp.checkCollisionRect(self.character.characterToRect()):
+            #    self.character.levelUp()
 
             pygame.display.update()
 
@@ -177,6 +188,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, examPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"exam").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -184,6 +198,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den sechsten Screen öffnet
     def mainloopGame6(self):
         self.room6Picture = pygame.image.load(room6Picture)
 
@@ -193,8 +208,6 @@ class Game():
             self.createEnemies("teacher")
             self.placeGame()
             self.keyPressGame()
-            self.screen6 = Label(self.win, "6", 500, 500, (255, 0, 0), 200)
-            self.screen6.drawLetter()
 
             pygame.display.update()
 
@@ -202,6 +215,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"teacher").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -209,6 +225,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den siebten Screen öffnet
     def mainloopGame7(self):
         self.room7Picture = pygame.image.load(room7Picture)
 
@@ -218,8 +235,6 @@ class Game():
             self.createEnemies("student")
             self.placeGame()
             self.keyPressGame()
-            self.screen7 = Label(self.win, "7", 500, 500, (255, 0, 0), 200)
-            self.screen7.drawLetter()
 
             pygame.display.update()
 
@@ -227,6 +242,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"student").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -234,6 +252,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den achten Screen öffnet
     def mainloopGame8(self):
         self.room8Picture = pygame.image.load(room8Picture)
 
@@ -243,8 +262,6 @@ class Game():
             self.createEnemies("teacher")
             self.placeGame()
             self.keyPressGame()
-            self.screen8 = Label(self.win, "8", 500, 500, (255, 0, 0), 200)
-            self.screen8.drawLetter()
 
             pygame.display.update()
 
@@ -252,6 +269,9 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"teacher").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -259,6 +279,7 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den neunten Screen öffnet
     def mainloopGame9(self):
         self.room9Picture = pygame.image.load(room9Picture)
   
@@ -268,8 +289,6 @@ class Game():
             self.createEnemies("principle")
             self.placeGame()
             self.keyPressGame()
-            self.screen9 = Label(self.win, "9", 500, 500, (255, 0, 0), 200)
-            self.screen9.drawLetter()
 
             pygame.display.update()
 
@@ -277,6 +296,12 @@ class Game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.startRun = False
+                if Enemy(self.win, 700, 500, principlePicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"principle").fightLoop()
+                if Enemy(self.win, 1100, 500, finalsPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                    if event.key == K_m:
+                        Fight(self.character,"finals").fightLoop()
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         self.escScreen()
@@ -284,25 +309,25 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den character platziert
     def placeGame(self):
         self.character.drawCharacter(self.character.x, self.character.y)
 
+    #Methode guckt welcher Gegner gemeint ist und ihn dann erstellt
     def createEnemies(self, enemyType):
         if enemyType == "test":
-            self.win.blit(self.testPicture, (0, 0))
+            self.win.blit(self.testPicture, (900, 500))
         elif enemyType == "student":
-            self.win.blit(self.studentPicture, (0, 0))
+            self.win.blit(self.studentPicture, (900, 500))
         elif enemyType == "exam":
-            self.win.blit(self.examPicture, (0, 0))
+            self.win.blit(self.examPicture, (900, 500))
         elif enemyType == "teacher":
-            self.win.blit(self.teacherPicture, (0, 0))
+            self.win.blit(self.teacherPicture, (900, 500))
         elif enemyType == "principle":
-            self.win.blit(self.principlePicture, (0, 0))
-            self.win.blit(self.finalsPicture, (400, 0))
-    
-    def triggerFight(self, enemyType):
-        pass
+            self.win.blit(self.principlePicture, (700, 500))
+            self.win.blit(self.finalsPicture, (1100, 500))
 
+    #Methode die entscheidet welcher screen geöffnet werden soll
     def loadMainloop(self):
         if self.gridX == 1 and self.gridY == 1:
             self.mainloopGame1()
@@ -322,14 +347,16 @@ class Game():
             self.mainloopGame8()
         elif self.gridX == 3 and self.gridY == 3:
             self.mainloopGame9()
-
+    
+    #Methode die überprüft ob das obere Ende des Bildschirmrandes berührt wird
     def checkEdgesW(self, keys):
-        if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
-            if self.gridY != 1:
-                self.gridY -= 1
-                self.character.y += self.winHeight - self.character.getCharacterHeight()
-                self.loadMainloop()
+        if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'): #wenn die zurzeit festgelegte Taste gedrückt wird
+            if self.gridY != 1: #und das "gridY" nicht gleich 1 ist
+                self.gridY -= 1 #wird das "girdY" um 1 verkeleinert
+                self.character.y += self.winHeight - self.character.getCharacterHeight() #und die Postion des characters verändert
+                self.loadMainloop() #und die "loadMainloop" Methode ausgeführtS
 
+    #Methode die überprüft ob das linke Ende des Bildschirmrandes berührt wird
     def checkEdgesA(self, keys):
         if eval(f'keys[pygame.K_{self.aEntry.text.lower()}]'):
             if self.gridX != 1:
@@ -337,6 +364,7 @@ class Game():
                 self.character.x += self.winWidth - self.character.getCharacterWidth()
                 self.loadMainloop()
 
+    #Methode die überprüft ob das untere Ende des Bildschirmrandes berührt wird
     def checkEdgesS(self, keys):
         if eval(f'keys[pygame.K_{self.sEntry.text.lower()}]'):
             if self.gridY != 3:
@@ -344,28 +372,30 @@ class Game():
                 self.character.y -= self.winHeight - self.character.getCharacterHeight()
                 self.loadMainloop()
 
+    #Methode die überprüft ob das rechte Ende des Bildschirmrandes berührt wird
     def checkEdgesD(self, keys):
         if eval(f'keys[pygame.K_{self.dEntry.text.lower()}]'):
             if self.gridX != 3:
                 self.gridX += 1
                 self.character.x -= self.winWidth - self.character.getCharacterWidth()
                 self.loadMainloop()
-
+    
+    #Methode die den character bewegt und den "statsScreen" öffnet
     def keyPressGame(self):
         keys = pygame.key.get_pressed()
         right = False
         left = False
 
-        if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'):
-            if self.character.y <= 0:
-                self.checkEdgesW(keys)
-            else:
+        if eval(f'keys[pygame.K_{self.wEntry.text.lower()}]'): #wenn die zurzeit festgelegte Taste gedrückt wird
+            if self.character.y <= 0: #und die Position des characters kleiner gleich null ist
+                self.checkEdgesW(keys) #wird die "checkEdgesW" Methode ausgeführt
+            else: #wenn die Position des characters größer als null ist
                 right = False
                 left = False
-                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'):
-                    self.character.y -= self.character.sprintVel
-                else:
-                    self.character.y -= self.character.vel
+                if eval(f'keys[pygame.K_{self.kEntry.text.lower()}]'): #und die zurzeit festgelegte Taste gedrückt wird
+                    self.character.y -= self.character.sprintVel #wird die Postition des character schnell verändert
+                else: #wenn die zurzeit festgelegte Taste nicht gedrückt wird
+                    self.character.y -= self.character.vel #wird die Postition des characters in normaler Geschwindigkeit verändert
 
         if eval(f'keys[pygame.K_{self.aEntry.text.lower()}]'):
             if self.character.x <= 0:
@@ -401,8 +431,9 @@ class Game():
                     self.character.x += self.character.vel
 
         if eval(f'keys[pygame.K_{self.lEntry.text.lower()}]'):
-            Game().inventoryLoop()
+            self.inventoryLoop()
 
+    #Methode die den escScreen öffnet
     def escScreen(self):
         self.escRun = True
         self.createEscScreen()
@@ -422,18 +453,21 @@ class Game():
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:
                         self.click = True
-
+    
+    #Methode die den escScreen erstellt
     def createEscScreen(self):
         self.continueButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 100, 200, 50, "CONTINUE")
         self.optionsButton = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 - 25, 200, 50, "OPTIONS")
         self.exitButtonStartScreen = Button(self.win, (36, 36, 36), self.winWidth/2 - 100, self.winHeight/2 + 50, 200, 50, "EXIT")
 
+    #Methode die den escScreen platziert
     def placeEscScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         self.continueButton.drawButton()
         self.optionsButton.drawButton()
         self.exitButtonStartScreen.drawButton()
 
+    #Methode in der die Funktion der Buttons erstellt wird
     def buttonPressEscScreen(self):
         mousePos = pygame.mouse.get_pos()
     
@@ -458,6 +492,7 @@ class Game():
         else:
             self.exitButtonStartScreen.color = (36, 36, 36)
 
+    #Methode die den optionsScreen öffnet
     def mainloopOptionsMenu(self):
         self.optionsRun = True
         self.createOptionsScreen()
@@ -480,7 +515,8 @@ class Game():
                 for entry in self.entryList:
                     entry.activateEntry(event)
                     entry.editEntry(event)
-    
+
+    #Methode die optionsScreen erstellt    
     def createOptionsScreen(self):
         self.commandsLabel = Label(self.win, "COMMANDS", 60,60)
         self.keysLabel = Label(self.win, "KEYS", self.winWidth/2 + 10, 60)
@@ -503,7 +539,8 @@ class Game():
         self.mKeyLabel = Button(self.win, (36, 36, 36), 50, 500, self.winWidth - 100, 50, "|")
         self.kKeyLabel = Button(self.win, (36, 36, 36), 50, 575, self.winWidth - 100, 50, "|")
         self.lKeyLabel = Button(self.win, (36, 36, 36), 50, 650, self.winWidth - 100, 50, "|")
-        self.buttonList = [self.exitButtonOptionsScreen, self.backButtonOptionsScreen, self.topBarLabel, self.wKeyLabel, self.aKeyLabel, self.sKeyLabel, self.dKeyLabel, self.mKeyLabel, self.kKeyLabel, self.lKeyLabel]
+        self.tippLabel = Button(self.win, (36, 36, 36), 50, 800, self.winWidth - 100, 50, "TIPP: IF YOU NEED HEALING, TAKE A NAP!")
+        self.buttonList = [self.exitButtonOptionsScreen, self.backButtonOptionsScreen, self.topBarLabel, self.wKeyLabel, self.aKeyLabel, self.sKeyLabel, self.dKeyLabel, self.mKeyLabel, self.kKeyLabel, self.lKeyLabel, self.tippLabel]
 
         self.wEntry = Entry(self.win, self.winWidth/2 + 8, 208, 35, 33, (36, 36, 36), "W")
         self.aEntry = Entry(self.win, self.winWidth/2 + 8, 283, 35, 33, (36, 36, 36), "A")
@@ -514,6 +551,7 @@ class Game():
         self.lEntry = Entry(self.win, self.winWidth/2 + 8, 658, 35, 33, (36, 36, 36), "L")
         self.entryList = [self.wEntry, self.aEntry, self.sEntry, self.dEntry, self.mEntry, self.kEntry, self.lEntry]
 
+    #Methode die den optionsScreen platziert
     def placeOptionsScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
 
@@ -526,7 +564,7 @@ class Game():
         for entry in self.entryList:
             entry.drawEntry()
         
-
+    #Methode in der die Funktion der Buttons erstellt wird
     def buttonPressOptionsScreen(self):
         mousePos = pygame.mouse.get_pos()
 
@@ -543,7 +581,8 @@ class Game():
                 self.optionsRun = False
         else:
             self.backButtonOptionsScreen.color = (36, 36, 36)
-
+    
+    #Methode die den inventorySceen öffnet
     def inventoryLoop(self):
         self.inventoryRun = True
         self.createInventoryScreen()
@@ -564,15 +603,43 @@ class Game():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den inventoryScreen erstllt
     def createInventoryScreen(self):
         self.exitButtonInventoryScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
         self.backButtonInventoryScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
+        self.nameButton = Button(self.win, (36, 36, 36), 400, 100, 1410, 50, f"Joavrid")
+        self.levelButton = Button(self.win, (36, 36, 36), 400, 160, 1410, 50, f"Level: {self.character.level}")
+        self.xpButton = Button(self.win, (0, 255, 0), 400, 220, (self.character.aktXP/self.character.maxXP)*1410, 50, f"")
+        self.xpButtonFull = Button(self.win, (36, 36, 36), 400, 220, 1410, 50, f"")
+        self.xpButtonText = Label(self.win, f"XP: {self.character.aktXP}/{self.character.maxXP}", 1040, 230)
+        self.hpButton = Button(self.win, (255, 0, 0), 400, 280, (self.character.aktHP/self.character.maxHP)*1410, 50, f"")
+        self.hpButtonFull = Button(self.win, (36, 36, 36), 400, 280, 1410, 50, f"")
+        self.hpButtonText = Label(self.win, f"HP: {self.character.aktHP}/{self.character.maxHP}", 1010, 290)
+        self.phyDamage = Button(self.win, (36, 36, 36), 400, 340, 1410, 50, f"Physischer Schaden: {self.character.phyDamage}")
+        self.defense = Button(self.win, (36, 36, 36), 400, 400, 1410, 50, f"Verteidigung: {self.character.defense}")
+        self.vel = Button(self.win, (36, 36, 36), 400, 460, 1410, 50, f"Geschwindigkeit: {self.character.vel}")
 
+    #Methode die den inventoryScreen platziert
     def placeInventoryScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
+        pygame.draw.rect(self.win, (0, 0, 255), (100, 100, 200, 400), 10)
         self.exitButtonInventoryScreen.drawButton()
         self.backButtonInventoryScreen.drawButton()
-    
+        
+        self.character.drawCharacter(140, 170)
+        self.nameButton.drawButton()
+        self.levelButton.drawButton()
+        self.xpButtonFull.drawButton()
+        self.xpButton.drawButton()
+        self.xpButtonText.drawLetter()
+        self.hpButtonFull.drawButton()
+        self.hpButton.drawButton()
+        self.hpButtonText.drawLetter()
+        self.phyDamage.drawButton()
+        self.defense.drawButton()
+        self.vel.drawButton()
+
+    #Methode in der die Funktion der Buttons erstellt wird
     def buttonPressInventoryScreen(self):
         mousePos = pygame.mouse.get_pos()
 
@@ -590,6 +657,7 @@ class Game():
         else:
             self.backButtonInventoryScreen.color = (36, 36, 36)
 
+#Klasse die ein Fight erstellt
 class Fight():
     def __init__(self, character, enemyType):
         self.win = win
@@ -604,7 +672,10 @@ class Fight():
         self.death = False
         self.deathCounter = 0
         self.enemyType = enemyType
+        self.victory = False
+        self.winCounter = 0
 
+    #Methode die den fithingScreen öffnet
     def fightLoop(self):
         self.startFight()
         self.fightRun = True
@@ -616,7 +687,6 @@ class Fight():
             self.buttonPressFightScreen()
             self.placeFight()
             
-
             pygame.display.update()
 
             self.click = False
@@ -628,6 +698,7 @@ class Fight():
                     if event.button == 1:
                         self.click = True
 
+    #Methode die den fightingScreen erstellt
     def createFight(self):
         self.chooseAction = Button(self.win, (36, 36, 36), 45, self.winHeight - 180, 910, 150)
         self.chooseAttack = Button(self.win, (36, 36, 36), self.chooseAction.getButtonWidth() + 55, self.winHeight - 180, 910, 150)
@@ -636,7 +707,9 @@ class Fight():
         self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 435, 60, "Stats")
         self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
         self.deathLabel = Label(self.win, "Your free trial of life has ended", 400, 500, (255, 0, 0), 100)
+        self.victoryLabel = Label(self.win, "YICORTY ROYALE", 650, 500, (255, 255, 0), 100)
 
+    #Methode die den fightingScreen platziert und den Spieler zurücksetzt   
     def placeFight(self):
         self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
         self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, f"{self.character.aktHP}/{self.character.maxHP} HP")
@@ -653,46 +726,57 @@ class Fight():
         self.statsButton.drawButton()
         self.enemy1.drawEnemy(1300, 100)
         self.character.drawCharacter(375, 600)
-        if self.death == True:
+        if self.death == True:              
             self.deathLabel.drawLetter()
             self.deathCounter += 1
             if self.deathCounter > 180:
                 self.fightRun = False
+                Game().mainloopGame1()
+        if self.victory == True:              
+            self.victoryLabel.drawLetter()
+            self.winCounter += 1
+            if self.winCounter > 180:
+                self.fightRun = False
+                exit()
+        
+        
 
+    #Methode die den Kampf startet
     def startFight(self):
-        self.Test = [studentPicture, "Test",                       50, 50, 15, 12, 8]
-        self.Schüler = [studentPicture, "Schüler",              100, 100, 20, 25, 10]
-        #self.Klausur = [examPicture, "Klausur",                 150, 100, 30, 40, 24]
-        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 45, 55, 42]
-        #self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 250, 80, 56]
-        #self.Abitur = [finalsPicture, "Abitur",                600, 600, 3000, 120, 80]
-        if enemyType == test:
+        self.Test = [testPicture, "Test",                       50, 50, 15, 12, 8]          #alle Gegner werden erstellt
+        self.Schüler = [studentPicture, "Schüler",              100, 100, 30, 25, 10]       #alle Gegner werden erstellt
+        self.Klausur = [examPicture, "Klausur",                 150, 150, 45, 40, 24]       #alle Gegner werden erstellt
+        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 60, 55, 42]       #alle Gegner werden erstellt
+        self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 300, 80, 56]      #alle Gegner werden erstellt
+        self.Abitur = [finalsPicture, "Abitur",                600, 600, 3000, 120, 80]     #alle Gegner werden erstellt
+        if self.enemyType == "test":                                                                                                                        #if -Statements, die Entscheiden welcher Gegner erstellt wird
             self.enemy1 = Enemy(self.win, 1300, 100, self.Test[0], self.Test[1], self.Test[2], self.Test[3], self.Test[4], self.Test[5], self.Test[6])
-        if enemyType == student:
+        if self.enemyType == "student":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Schüler[0], self.Schüler[1], self.Schüler[2], self.Schüler[3], self.Schüler[4], self.Schüler[5], self.Schüler[6])
-        if enemyType == exam:
+        if self.enemyType == "exam":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Klausur[0], self.Klausur[1], self.Klausur[2], self.Klausur[3], self.Klausur[4], self.Klausur[5], self.Klausur[6])
-        if enemyType == teacher:
+        if self.enemyType == "teacher":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Lehrer[0], self.Lehrer[1], self.Lehrer[2], self.Lehrer[3], self.Lehrer[4], self.Lehrer[5], self.Lehrer[6])
-        if enemyType == principle:
+        if self.enemyType == "principle":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Schulleiter[0], self.Schulleiter[1], self.Schulleiter[2], self.Schulleiter[3], self.Schulleiter[4], self.Schulleiter[5], self.Schulleiter[6])
-        if enemyType == finals:
+        if self.enemyType == "finals":
             self.enemy1 = Enemy(self.win, 1300, 100, self.Abitur[0], self.Abitur[1], self.Abitur[2], self.Abitur[3], self.Abitur[4], self.Abitur[5], self.Abitur[6])
 
+    #Methode die das Kämpfen definiert
     def fighting(self, damage, enemyDmg): 
-        self.enemy1.takeDamage(damage)
-        self.character.takeDamage(enemyDmg)
-        if self.enemy1.aktHP <= 0:
-            self.character.xpGain(self.enemy1.xp)
-            self.fightRun = False
-        elif self.character.aktHP <= 0:
-            self.death = True
-            self.enemy1.defense = 1000
-
-            #sleep(5)
-            #self.fightRun = False
+        self.enemy1.takeDamage(damage)              #Gegner nimmt Schaden
+        if self.enemy1.aktHP <= 0:                  #Es wird gechecked ob der Gegner Tod ist
+            self.character.xpGain(self.enemy1.xp)   #Der Spieler erhält die XP des Gegners
+            if self.enemyType == "finals":   
+                self.victory = True
+            else:
+                self.fightRun = False
+        self.character.takeDamage(enemyDmg)         #Spieler nimmt Schaden
+        if self.character.aktHP <= 0:               #Es wird gechecked ob der Spieler Tod ist
+            self.death = True                       #Spieler ist Tod
+            self.enemy1.defense = 1000              #Gegner wird unsterblich, weil man noch weiter angreifen köntte
             
-
+    #Methode in der die Funktion der Buttons erstellt wird
     def buttonPressFightScreen(self):
         mousePos = pygame.mouse.get_pos()
 
@@ -713,54 +797,81 @@ class Fight():
         if self.statsButton.checkCollision(mousePos):
             self.statsButton.color = (255, 0, 255)
             if self.click:
-                self.statsScreen()
+                self.inventoryLoop()
         else:
             self.statsButton.color = (10, 10, 10)
+            
+    #Methode die den inventorySceen öffnet
+    def inventoryLoop(self):
+        self.inventoryRun = True
+        self.createInventoryScreen()
 
-    def statsScreen(self):
-        self.statsRun = True
-        self.createStatsScreen()
-
-        while self.statsRun:
+        while self.inventoryRun:
             self.clock.tick(self.FPS)
             self.win.fill((0, 0, 0))
-            self.placeStatsScreen()
-            self.buttonPressStatsScreen()
+            self.placeInventoryScreen()
+            self.buttonPressInventoryScreen()
             pygame.display.update()
 
             self.click = False
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
-                        self.statsRun = False
+                        self.inventoryRun = False
                 if event.type == MOUSEBUTTONDOWN:
                     if event.button == 1:
                         self.click = True
 
-    def createStatsScreen(self):
-        self.exitButtonStatsScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
-        self.backButtonStatsScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
+    #Methode die den inventoryScreen erstllt
+    def createInventoryScreen(self):
+        self.exitButtonInventoryScreen = Button(self.win, (36, 36, 36), self.winWidth - 250, self.winHeight - 100, 200, 50, "EXIT")
+        self.backButtonInventoryScreen = Button(self.win, (36, 36, 36), 50, self.winHeight - 100, 200, 50, "BACK")
+        self.nameButton = Button(self.win, (36, 36, 36), 400, 100, 1410, 50, f"Joavrid")
+        self.levelButton = Button(self.win, (36, 36, 36), 400, 160, 1410, 50, f"Level: {self.character.level}")
+        self.xpButton = Button(self.win, (0, 255, 0), 400, 220, (self.character.aktXP/self.character.maxXP)*1410, 50, f"")
+        self.xpButtonFull = Button(self.win, (36, 36, 36), 400, 220, 1410, 50, f"")
+        self.xpButtonText = Label(self.win, f"XP: {self.character.aktXP}/{self.character.maxXP}", 1040, 230)
+        self.hpButton = Button(self.win, (255, 0, 0), 400, 280, (self.character.aktHP/self.character.maxHP)*1410, 50, f"")
+        self.hpButtonFull = Button(self.win, (36, 36, 36), 400, 280, 1410, 50, f"")
+        self.hpButtonText = Label(self.win, f"HP: {self.character.aktHP}/{self.character.maxHP}", 1010, 290)
+        self.phyDamage = Button(self.win, (36, 36, 36), 400, 340, 1410, 50, f"Physischer Schaden: {self.character.phyDamage}")
+        self.defense = Button(self.win, (36, 36, 36), 400, 400, 1410, 50, f"Verteidigung: {self.character.defense}")
+        self.vel = Button(self.win, (36, 36, 36), 400, 460, 1410, 50, f"Geschwindigkeit: {self.character.vel}")
 
-    def placeStatsScreen(self):
+    #Methode die den inventoryScreen platziert
+    def placeInventoryScreen(self):
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
-        self.exitButtonStatsScreen.drawButton()
-        self.backButtonStatsScreen.drawButton()
+        pygame.draw.rect(self.win, (0, 0, 255), (100, 100, 200, 400), 10)
+        self.exitButtonInventoryScreen.drawButton()
+        self.backButtonInventoryScreen.drawButton()
+        
+        self.character.drawCharacter(140, 170)
+        self.nameButton.drawButton()
+        self.levelButton.drawButton()
+        self.xpButtonFull.drawButton()
+        self.xpButton.drawButton()
+        self.xpButtonText.drawLetter()
+        self.hpButtonFull.drawButton()
+        self.hpButton.drawButton()
+        self.hpButtonText.drawLetter()
+        self.phyDamage.drawButton()
+        self.defense.drawButton()
+        self.vel.drawButton()
 
-    def buttonPressStatsScreen(self):
+    #Methode in der die Funktion der Buttons erstellt wird
+    def buttonPressInventoryScreen(self):
         mousePos = pygame.mouse.get_pos()
 
-        if self.backButtonStatsScreen.checkCollision(mousePos):
-            self.backButtonStatsScreen.color = (255, 0, 0)
-            if self.click:
-                self.statsRun = False
-        else:
-            self.backButtonStatsScreen.color = (36, 36, 36)
-
-        if self.exitButtonStatsScreen.checkCollision(mousePos):
-            self.exitButtonStatsScreen.color = (255, 0, 0)
+        if self.exitButtonInventoryScreen.checkCollision(mousePos):
+            self.exitButtonInventoryScreen.color = (255, 0, 0)
             if self.click:
                 exit()
         else:
-            self.exitButtonStatsScreen.color = (36, 36, 36)
+            self.exitButtonInventoryScreen.color = (36, 36, 36)
 
-#Fight().fightLoop()
+        if self.backButtonInventoryScreen.checkCollision(mousePos):
+            self.backButtonInventoryScreen.color = (255, 0, 0)
+            if self.click:
+                self.inventoryRun = False
+        else:
+            self.backButtonInventoryScreen.color = (36, 36, 36)
