@@ -794,21 +794,21 @@ class Fight():
     def buttonPressFightScreen(self):
         mousePos = pygame.mouse.get_pos()
 
-        if self.attackButton.checkCollision(mousePos):
+        if self.attackButton.checkCollision(mousePos) and self.death == False and self.victory == False:
             self.attackButton.color = (255, 0, 0)
             if self.click:
                 self.fighting(self.character.phyDamage, self.enemy1.phyDamage)
         else:
             self.attackButton.color = (10, 10, 10)
 
-        if self.escapeButton.checkCollision(mousePos):
+        if self.escapeButton.checkCollision(mousePos) and self.death == False and self.victory == False:
             self.escapeButton.color = (0, 255, 255)
             if self.click:
                 self.fightRun = False
         else:
             self.escapeButton.color = (10, 10, 10)
 
-        if self.statsButton.checkCollision(mousePos):
+        if self.statsButton.checkCollision(mousePos) and self.death == False and self.victory == False:
             self.statsButton.color = (255, 0, 255)
             if self.click:
                 self.inventoryLoop()
