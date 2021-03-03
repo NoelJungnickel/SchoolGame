@@ -76,7 +76,8 @@ class GameMenu():
         if self.startButton.checkCollision(mousePos): #wenn das Objekt "startbutton" mit der eben festgelegten Maupostion kollidiert
             self.startButton.color = (0, 255, 0) #wird die Farbe des "startbuttons" zu Grün geändert
             if self.click: #wenn die eben festgelegte Variable wahr ist
-                Game().mainloopGame1() #wird die methode "mainloop1" in der Klasse "Game" ausgeführt
+                Game1 = Game() #objekt der Klasse "Game" wird erstellt
+                Game1.mainloopGame1() #wird die methode "mainloop1" in der Klasse "Game" ausgeführt
         else: #wenn das Objekt "startbutoon" nicht mit der eben festgelegten Mausposition killidiert
             self.startButton.color = (36, 36, 36) #wird die Farbe des "startbuttons" zu Grau geändert
         

@@ -50,8 +50,10 @@ class Game():
     def mainloopGame1(self):
         self.room1Picture = pygame.image.load(room1Picture)
         self.heal = False
+        self.gameRun = True
 
         while self.gameRun:
+            print(1)
             self.clock.tick(self.FPS)
             self.win.blit(self.room1Picture, (0, 0)) #das Bild wird auf den Bildschirm platziert
             self.placeGame()
@@ -67,7 +69,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if self.Bett.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Bett kolidiert
                     if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
                         self.character.fullHeal() #character wird voll geheilt
@@ -82,8 +84,10 @@ class Game():
     #Methode die den zweiten Screen öffnet
     def mainloopGame2(self):
         self.room2Picture = pygame.image.load(room2Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(2)
             self.clock.tick(self.FPS)
             self.win.blit(self.room2Picture, (0, 0))
             self.createEnemies("test") #gegner "test" wird erstellt
@@ -99,7 +103,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Gegner kolidiert
                     if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
                         Fight(self.character,"test").fightLoop() #öffnet den Fightscreen mit dem Gegner "test"
@@ -113,8 +117,10 @@ class Game():
     #Methode die den dritten Screen öffnet
     def mainloopGame3(self):
         self.room3Picture = pygame.image.load(room3Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(3)
             self.clock.tick(self.FPS)
             self.win.blit(self.room3Picture, (0, 0))
             self.createEnemies("student")
@@ -126,7 +132,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"student").fightLoop()
@@ -140,8 +146,10 @@ class Game():
     #Methode die den vierten Screen öffnet
     def mainloopGame4(self):
         self.room4Picture = pygame.image.load(room4Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(4)
             self.clock.tick(self.FPS)
             self.win.blit(self.room4Picture, (0, 0))
             self.createEnemies("test")
@@ -153,7 +161,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"test").fightLoop()
@@ -167,8 +175,10 @@ class Game():
     #Methode die den fünften Screen öffnet
     def mainloopGame5(self):
         self.room5Picture = pygame.image.load(room5Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(5)
             self.clock.tick(self.FPS)
             self.win.blit(self.room5Picture, (0, 0))
             self.createEnemies("exam")
@@ -187,7 +197,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, examPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"exam").fightLoop()
@@ -201,8 +211,10 @@ class Game():
     #Methode die den sechsten Screen öffnet
     def mainloopGame6(self):
         self.room6Picture = pygame.image.load(room6Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(6)
             self.clock.tick(self.FPS)
             self.win.blit(self.room6Picture, (0, 0))
             self.createEnemies("teacher")
@@ -214,7 +226,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"teacher").fightLoop()
@@ -228,8 +240,10 @@ class Game():
     #Methode die den siebten Screen öffnet
     def mainloopGame7(self):
         self.room7Picture = pygame.image.load(room7Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(7)
             self.clock.tick(self.FPS)
             self.win.blit(self.room7Picture, (0, 0))
             self.createEnemies("student")
@@ -241,7 +255,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"student").fightLoop()
@@ -255,8 +269,10 @@ class Game():
     #Methode die den achten Screen öffnet
     def mainloopGame8(self):
         self.room8Picture = pygame.image.load(room8Picture)
+        self.gameRun = True
 
         while self.gameRun:
+            print(8)
             self.clock.tick(self.FPS)
             self.win.blit(self.room8Picture, (0, 0))
             self.createEnemies("teacher")
@@ -268,7 +284,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"teacher").fightLoop()
@@ -282,8 +298,10 @@ class Game():
     #Methode die den neunten Screen öffnet
     def mainloopGame9(self):
         self.room9Picture = pygame.image.load(room9Picture)
+        self.gameRun = True
   
         while self.gameRun:
+            print(9)
             self.clock.tick(self.FPS)
             self.win.blit(self.room9Picture, (0, 0))
             self.createEnemies("principle")
@@ -295,7 +313,7 @@ class Game():
             self.click = False
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.startRun = False
+                    self.gameRun = False
                 if Enemy(self.win, 700, 500, principlePicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
                     if event.key == K_m:
                         Fight(self.character,"principle").fightLoop()
@@ -354,7 +372,7 @@ class Game():
             if self.gridY != 1: #und das "gridY" nicht gleich 1 ist
                 self.gridY -= 1 #wird das "girdY" um 1 verkeleinert
                 self.character.y += self.winHeight - self.character.getCharacterHeight() #und die Postion des characters verändert
-                self.loadMainloop() #und die "loadMainloop" Methode ausgeführtS
+                self.loadMainloop()
 
     #Methode die überprüft ob das linke Ende des Bildschirmrandes berührt wird
     def checkEdgesA(self, keys):
@@ -706,13 +724,15 @@ class Fight():
         self.attackButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 170, 880, 60, "Attack")
         self.statsButton = Button(self.win, (10, 10, 10), 60, self.winHeight - 100, 435, 60, "Stats")
         self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
+        self.nameCharacterButton = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, "Joavrid")
         self.deathLabel = Label(self.win, "Your free trial of life has ended", 400, 500, (255, 0, 0), 100)
         self.victoryLabel = Label(self.win, "YICORTY ROYALE", 650, 500, (255, 255, 0), 100)
 
     #Methode die den fightingScreen platziert und den Spieler zurücksetzt   
     def placeFight(self):
-        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 45, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
-        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, f"{self.character.aktHP}/{self.character.maxHP} HP")
+        self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 125, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
+        self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 485, 300, 60, f"{self.character.aktHP}/{self.character.maxHP} HP")
+        self.nameEnemyButton = Button(self.win, (255, 0, 0), 50, 50, 300, 60, self.Test[1])
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
         pygame.draw.rect(self.win, (0, 0, 255), (1200, self.winHeight - 1000, 550, 300), 10)
@@ -724,6 +744,8 @@ class Fight():
         self.attackButton.drawButton()
         self.escapeButton.drawButton()
         self.statsButton.drawButton()
+        self.nameEnemyButton.drawButton()
+        self.nameCharacterButton.drawButton()
         self.enemy1.drawEnemy(1410, 120)
         self.character.drawCharacter(360, 600)
         if self.death == True: #wenn "death" wahr ist

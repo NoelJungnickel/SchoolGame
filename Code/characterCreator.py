@@ -47,7 +47,6 @@ class Character():
         if self.aktXP >= self.maxXP:
             self.aktXP -= self.maxXP
             self.levelUp() #führt die "levelUp" Methode aus
-            self.checkLevel() #führt die "checkLevel" Methode aus
 
     #Methode die den Character Leben verlieren lässt
     def takeDamage(self, damage):
