@@ -53,7 +53,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(1)
             self.clock.tick(self.FPS)
             self.win.blit(self.room1Picture, (0, 0)) #das Bild wird auf den Bildschirm platziert
             self.placeGame()
@@ -87,7 +86,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(2)
             self.clock.tick(self.FPS)
             self.win.blit(self.room2Picture, (0, 0))
             self.createEnemies("test") #gegner "test" wird erstellt
@@ -120,7 +118,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(3)
             self.clock.tick(self.FPS)
             self.win.blit(self.room3Picture, (0, 0))
             self.createEnemies("student")
@@ -149,7 +146,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(4)
             self.clock.tick(self.FPS)
             self.win.blit(self.room4Picture, (0, 0))
             self.createEnemies("test")
@@ -178,7 +174,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(5)
             self.clock.tick(self.FPS)
             self.win.blit(self.room5Picture, (0, 0))
             self.createEnemies("exam")
@@ -214,7 +209,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(6)
             self.clock.tick(self.FPS)
             self.win.blit(self.room6Picture, (0, 0))
             self.createEnemies("teacher")
@@ -243,7 +237,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(7)
             self.clock.tick(self.FPS)
             self.win.blit(self.room7Picture, (0, 0))
             self.createEnemies("student")
@@ -272,7 +265,6 @@ class Game():
         self.gameRun = True
 
         while self.gameRun:
-            print(8)
             self.clock.tick(self.FPS)
             self.win.blit(self.room8Picture, (0, 0))
             self.createEnemies("teacher")
@@ -301,7 +293,6 @@ class Game():
         self.gameRun = True
   
         while self.gameRun:
-            print(9)
             self.clock.tick(self.FPS)
             self.win.blit(self.room9Picture, (0, 0))
             self.createEnemies("principle")
@@ -726,13 +717,13 @@ class Fight():
         self.escapeButton = Button(self.win, (10, 10, 10), 505, self.winHeight - 100, 435, 60, "Escape")
         self.nameCharacterButton = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 560, 300, 60, "Joavrid")
         self.deathLabel = Label(self.win, "Your free trial of life has ended", 400, 500, (255, 0, 0), 100)
-        self.victoryLabel = Label(self.win, "YICORTY ROYALE", 650, 500, (255, 255, 0), 100)
+        self.victoryLabel = Label(self.win, "VICORTY ROYALE", 650, 500, (255, 255, 0), 100)
 
-    #Methode die den fightingScreen platziert und den Spieler zurücksetzt   
+    #Methode die den fightingScreen platziert und den Spieler zurücksetzt
     def placeFight(self):
         self.enemyHpBar = Button(self.win, (255, 0, 0), 50, 125, 300, 60, f"{self.enemy1.aktHP}/{self.enemy1.maxHP} HP")
         self.playerHpBar = Button(self.win, (0, 255, 0), self.winWidth - 350, self.winHeight - 485, 300, 60, f"{self.character.aktHP}/{self.character.maxHP} HP")
-        self.nameEnemyButton = Button(self.win, (255, 0, 0), 50, 50, 300, 60, self.Test[1])
+        self.nameEnemyButton = Button(self.win, (255, 0, 0), 50, 50, 300, 60, self.enemy1.name)
         pygame.draw.rect(self.win, (0, 0, 255), (0, 0, self.winWidth, self.winHeight), 20)
         pygame.draw.rect(self.win, (0, 0, 255), (150, self.winHeight - 510, 550, 300), 10)
         pygame.draw.rect(self.win, (0, 0, 255), (1200, self.winHeight - 1000, 550, 300), 10)
@@ -793,7 +784,8 @@ class Fight():
                 self.victory = True
             else:
                 self.fightRun = False
-        self.character.takeDamage(enemyDmg)         #Spieler nimmt Schaden
+        else:
+            self.character.takeDamage(enemyDmg)         #Spieler nimmt Schaden
         if self.character.aktHP <= 0:               #Es wird gechecked ob der Spieler Tod ist
             self.death = True                       #Spieler ist Tod
             self.enemy1.defense = 1000              #Gegner wird unsterblich, weil man noch weiter angreifen köntte
