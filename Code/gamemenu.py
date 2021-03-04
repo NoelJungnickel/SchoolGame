@@ -3,6 +3,8 @@ from pygame.locals import *
 from shapeCreator import Entry, Label, Button
 from game import Game
 from characterCreator import Character
+from enemyCreator import Enemy
+from game import Fight
 from resource import *
 
 pygame.init()
@@ -76,8 +78,10 @@ class GameMenu():
         if self.startButton.checkCollision(mousePos): #wenn das Objekt "startbutton" mit der eben festgelegten Maupostion kollidiert
             self.startButton.color = (0, 255, 0) #wird die Farbe des "startbuttons" zu Grün geändert
             if self.click: #wenn die eben festgelegte Variable wahr ist
-                Game1 = Game() #objekt der Klasse "Game" wird erstellt
-                Game1.mainloopGame1() #wird die methode "mainloop1" in der Klasse "Game" ausgeführt
+                Game1 = Game()
+                while Game1.gameRun:
+                    Game1.loadMainloop()
+
         else: #wenn das Objekt "startbutoon" nicht mit der eben festgelegten Mausposition killidiert
             self.startButton.color = (36, 36, 36) #wird die Farbe des "startbuttons" zu Grau geändert
         
@@ -185,5 +189,11 @@ class GameMenu():
         else:
             self.backButtonOptionsScreen.color = (36, 36, 36)
 
+#Game1 = Game() #objekt der Klasse "Game" wird erstellt
+
+#while Game1.gameRun:
+#    Game1.loadMainloop()
+
 Menu1 = GameMenu() #ein neues Objekt der Klasse "GameMenu" wird erstellt
 Menu1.mainloopStartMenu() #die Methode "mainloopStartMenu" des Objektes "Menu1", welches grade eben erstellt wurde, wird ausgeführt
+

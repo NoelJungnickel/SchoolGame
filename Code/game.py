@@ -26,11 +26,12 @@ class Game():
     def __init__(self):
         self.win = win
         self.winName = winName
-        self.gameRun = True
         self.clock = pygame.time.Clock()
         self.FPS = 60
         self.winWidth = winWidth
         self.winHeight = winHeight
+        self.gameRun = True
+        self.heal = False
         self.click = False
         self.gridX = 1
         self.gridY = 1
@@ -49,274 +50,266 @@ class Game():
     #Methode die den ersten Screen öffnet
     def mainloopGame1(self):
         self.room1Picture = pygame.image.load(room1Picture)
-        self.heal = False
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room1Picture, (0, 0)) #das Bild wird auf den Bildschirm platziert
-            self.placeGame()
-            self.keyPressGame()
-            self.Bett = Button(self.win, (0, 0, 0), 150, 50, 800, 400)
-            self.healLabel = Label(self.win, "Du wurdest vollständig geheilt", 400, 500, (0, 255, 0), 100)
-            
-            if self.heal == True:
-                self.healLabel.drawLetter()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room1Picture, (0, 0)) #das Bild wird auf den Bildschirm platziert
+        self.placeGame()
+        self.keyPressGame()
+        self.Bett = Button(self.win, (0, 0, 0), 150, 50, 800, 400)
+        self.healLabel = Label(self.win, "Du wurdest vollständig geheilt", 400, 500, (0, 255, 0), 100)
+        
+        if self.heal == True:
+            self.healLabel.drawLetter()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if self.Bett.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Bett kolidiert
-                    if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
-                        self.character.fullHeal() #character wird voll geheilt
-                        self.heal = True
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if self.Bett.checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Bett kolidiert
+                if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
+                    self.character.fullHeal() #character wird voll geheilt
+                    self.heal = True
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den zweiten Screen öffnet
     def mainloopGame2(self):
         self.room2Picture = pygame.image.load(room2Picture)
         self.gameRun = True
+        self.heal = False
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room2Picture, (0, 0))
-            self.createEnemies("test") #gegner "test" wird erstellt
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room2Picture, (0, 0))
+        self.createEnemies("test") #gegner "test" wird erstellt
+        self.placeGame()
+        self.keyPressGame()
 
-            #self.triggerFight = Enemy(self.win, 900, 500, testPicture).enemyToRect()
-            #self.triggerFight.pygame.draw.rect()
+        #self.triggerFight = Enemy(self.win, 900, 500, testPicture).enemyToRect()
+        #self.triggerFight.pygame.draw.rect()
 
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Gegner kolidiert
-                    if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
-                        Fight(self.character,"test").fightLoop() #öffnet den Fightscreen mit dem Gegner "test"
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN: #überprüft ob der Character mit dem Gegner kolidiert
+                if event.key == K_m: #überprüft ob die Taste "M" gedrückt wird
+                    Fight(self.character,"test").fightLoop() #öffnet den Fightscreen mit dem Gegner "test"
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den dritten Screen öffnet
     def mainloopGame3(self):
         self.room3Picture = pygame.image.load(room3Picture)
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room3Picture, (0, 0))
-            self.createEnemies("student")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room3Picture, (0, 0))
+        self.createEnemies("student")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"student").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"student").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den vierten Screen öffnet
     def mainloopGame4(self):
         self.room4Picture = pygame.image.load(room4Picture)
         self.gameRun = True
+        self.heal = False
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room4Picture, (0, 0))
-            self.createEnemies("test")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room4Picture, (0, 0))
+        self.createEnemies("test")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"test").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, testPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"test").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den fünften Screen öffnet
     def mainloopGame5(self):
         self.room5Picture = pygame.image.load(room5Picture)
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room5Picture, (0, 0))
-            self.createEnemies("exam")
-            self.placeGame()
-            self.keyPressGame()          
-            
-            #self.levelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'levelUp', textColor = (0, 0, 255), textSize = 50)
-            #self.levelUp.drawButton()
-            #self.level = Label(self.win, str(self.character.level), 800, 500, (0, 255, 0), 200)
-            #self.level.drawLetter()
-            #if self.levelUp.checkCollisionRect(self.character.characterToRect()):
-            #    self.character.levelUp()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room5Picture, (0, 0))
+        self.createEnemies("exam")
+        self.placeGame()
+        self.keyPressGame()          
+        
+        #self.levelUp = Button(self.win, (255, 255, 255), 300, 300, 80, 50, text = 'levelUp', textColor = (0, 0, 255), textSize = 50)
+        #self.levelUp.drawButton()
+        #self.level = Label(self.win, str(self.character.level), 800, 500, (0, 255, 0), 200)
+        #self.level.drawLetter()
+        #if self.levelUp.checkCollisionRect(self.character.characterToRect()):
+        #    self.character.levelUp()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, examPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"exam").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, examPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"exam").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den sechsten Screen öffnet
     def mainloopGame6(self):
         self.room6Picture = pygame.image.load(room6Picture)
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room6Picture, (0, 0))
-            self.createEnemies("teacher")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room6Picture, (0, 0))
+        self.createEnemies("teacher")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"teacher").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"teacher").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den siebten Screen öffnet
     def mainloopGame7(self):
         self.room7Picture = pygame.image.load(room7Picture)
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room7Picture, (0, 0))
-            self.createEnemies("student")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room7Picture, (0, 0))
+        self.createEnemies("student")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"student").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, studentPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"student").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den achten Screen öffnet
     def mainloopGame8(self):
         self.room8Picture = pygame.image.load(room8Picture)
         self.gameRun = True
 
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room8Picture, (0, 0))
-            self.createEnemies("teacher")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room8Picture, (0, 0))
+        self.createEnemies("teacher")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"teacher").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 900, 500, teacherPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"teacher").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den neunten Screen öffnet
     def mainloopGame9(self):
         self.room9Picture = pygame.image.load(room9Picture)
         self.gameRun = True
   
-        while self.gameRun:
-            self.clock.tick(self.FPS)
-            self.win.blit(self.room9Picture, (0, 0))
-            self.createEnemies("principle")
-            self.placeGame()
-            self.keyPressGame()
+        self.clock.tick(self.FPS)
+        self.win.blit(self.room9Picture, (0, 0))
+        self.createEnemies("principle")
+        self.placeGame()
+        self.keyPressGame()
 
-            pygame.display.update()
+        pygame.display.update()
 
-            self.click = False
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.gameRun = False
-                if Enemy(self.win, 700, 500, principlePicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"principle").fightLoop()
-                if Enemy(self.win, 1100, 500, finalsPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
-                    if event.key == K_m:
-                        Fight(self.character,"finals").fightLoop()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        self.escScreen()
-                if event.type == MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.click = True
+        self.click = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.gameRun = False
+            if Enemy(self.win, 700, 500, principlePicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"principle").fightLoop()
+            if Enemy(self.win, 1100, 500, finalsPicture).checkCollisionRect(self.character.characterToRect()) and event.type == KEYDOWN:
+                if event.key == K_m:
+                    Fight(self.character,"finals").fightLoop()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.escScreen()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    self.click = True
 
     #Methode die den character platziert
     def placeGame(self):
@@ -363,7 +356,7 @@ class Game():
             if self.gridY != 1: #und das "gridY" nicht gleich 1 ist
                 self.gridY -= 1 #wird das "girdY" um 1 verkeleinert
                 self.character.y += self.winHeight - self.character.getCharacterHeight() #und die Postion des characters verändert
-                self.loadMainloop()
+                
 
     #Methode die überprüft ob das linke Ende des Bildschirmrandes berührt wird
     def checkEdgesA(self, keys):
@@ -371,7 +364,7 @@ class Game():
             if self.gridX != 1:
                 self.gridX -= 1
                 self.character.x += self.winWidth - self.character.getCharacterWidth()
-                self.loadMainloop()
+                
 
     #Methode die überprüft ob das untere Ende des Bildschirmrandes berührt wird
     def checkEdgesS(self, keys):
@@ -379,7 +372,7 @@ class Game():
             if self.gridY != 3:
                 self.gridY += 1
                 self.character.y -= self.winHeight - self.character.getCharacterHeight()
-                self.loadMainloop()
+                
 
     #Methode die überprüft ob das rechte Ende des Bildschirmrandes berührt wird
     def checkEdgesD(self, keys):
@@ -387,7 +380,7 @@ class Game():
             if self.gridX != 3:
                 self.gridX += 1
                 self.character.x -= self.winWidth - self.character.getCharacterWidth()
-                self.loadMainloop()
+                
     
     #Methode die den character bewegt und den "statsScreen" öffnet
     def keyPressGame(self):
@@ -741,10 +734,10 @@ class Fight():
         self.character.drawCharacter(360, 600)
         if self.death == True: #wenn "death" wahr ist
             self.deathLabel.drawLetter() #wird das "deathLabel" angezeigt
-            self.deathCounter += 1 #der deathCounter um 1 erhöht 
+            self.deathCounter += 1 #der deathCounter um 1 erhöht
             if self.deathCounter > 180: #wenn der "deathCounter" größer als 180 ist
                 self.fightRun = False #wird "fightRun" falsch gesetzt
-                Game().mainloopGame1() #und die "mainloopGame1" ausgeführt
+                exit()
         if self.victory == True:              
             self.victoryLabel.drawLetter()
             self.winCounter += 1
