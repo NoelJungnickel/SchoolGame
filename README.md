@@ -5,7 +5,7 @@ SchoolGame is a self made single player game
 ## Requirements
 
 ```bash
-Python
+Python compailer with pip
 ```
 
 ## Installation
