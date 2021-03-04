@@ -23,7 +23,11 @@ class Enemy():
     
     #Methode mit der man Leben verliert
     def takeDamage(self, damage):
-        self.aktHP -= (damage - (self.defense/2))
+        self.takenDamage = (damage - (self.defense/2))
+        if self.takenDamage < 4:
+            self.takenDamage =4
+
+        self.aktHP -= self.takenDamage
 
     #Methode die die  Breite zurückgibt
     def getEnemyWidth(self):

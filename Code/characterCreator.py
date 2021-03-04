@@ -50,7 +50,11 @@ class Character():
 
     #Methode die den Character Leben verlieren lässt
     def takeDamage(self, damage):
-        self.aktHP -= (damage - (self.defense/2))
+        self.takenDamage = (damage - (self.defense/2))
+        if self.takenDamage < 4:
+            self.takenDamage =4
+
+        self.aktHP -= self.takenDamage
     
     #Methode die den Character voll heilt
     def fullHeal(self):

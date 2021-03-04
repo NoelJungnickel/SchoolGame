@@ -751,9 +751,9 @@ class Fight():
     def startFight(self):
         self.Test = [testPicture, "Test",                       50, 50, 15, 12, 8]          #alle Gegner werden erstellt
         self.Schüler = [studentPicture, "Schüler",              100, 100, 30, 25, 10]       #alle Gegner werden erstellt
-        self.Klausur = [examPicture, "Klausur",                 150, 150, 45, 40, 24]       #alle Gegner werden erstellt
-        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 60, 55, 42]       #alle Gegner werden erstellt
-        self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 300, 80, 56]      #alle Gegner werden erstellt
+        self.Klausur = [examPicture, "Klausur",                 150, 150, 50, 40, 24]       #alle Gegner werden erstellt
+        self.Lehrer = [teacherPicture, "Lehrer",                200, 200, 100, 55, 42]       #alle Gegner werden erstellt
+        self.Schulleiter = [principlePicture, "Schulleiter",    300, 300, 1000, 80, 56]      #alle Gegner werden erstellt
         self.Abitur = [finalsPicture, "Abitur",                600, 600, 3000, 120, 80]     #alle Gegner werden erstellt
         if self.enemyType == "test":                                                        #if -Statements, die Entscheiden welcher Gegner erstellt wird
             self.enemy1 = Enemy(self.win, 1300, 100, self.Test[0], self.Test[1], self.Test[2], self.Test[3], self.Test[4], self.Test[5], self.Test[6])
@@ -781,7 +781,6 @@ class Fight():
             self.character.takeDamage(enemyDmg)         #Spieler nimmt Schaden
         if self.character.aktHP <= 0:               #Es wird gechecked ob der Spieler Tod ist
             self.death = True                       #Spieler ist Tod
-            self.enemy1.defense = 1000              #Gegner wird unsterblich, weil man noch weiter angreifen köntte
             
     #Methode in der die Funktion der Buttons erstellt wird
     def buttonPressFightScreen(self):
